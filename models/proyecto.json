@@ -1,0 +1,48 @@
+{
+	"proyectos": [
+		{
+			"nombre": "Proyecto de wallapop",
+			"miembros": ["kevin", "Guillermo", "Jesús"],
+			"tareas":[{
+					"tarea": "Empezar maquetado",
+					"estado": "Finalizada",
+					"propietario": "Guillermo",
+					"proyecto" : "Proyecto de wallapop"
+				},
+				{
+					"tarea": "Estructurar el back",
+					"estado": "NoAsignada",
+					"propietario": "",
+					"proyecto" : "Proyecto de wallapop"
+				},
+				{
+					"tarea": "Terminar el login",
+					"estado": "Empezada",
+					"propietario": "kevin",
+					"proyecto" : "Proyecto de wallapop"
+				},
+				{
+					"tarea": "Terminar el listado",
+					"estado": "Finalizada",
+					"propietario": "kevin",
+					"proyecto" : "Proyecto de wallapop"
+				}]
+		},
+		{
+			"nombre": "Proyecto de la comunidad",
+			"miembros": [ "Guillermo", "Jesús"],
+			"tareas":[{
+					"tarea": "Empezar maquetado",
+					"estado": "NoAsignada",
+					"propietario": "",
+					"proyecto" : "Proyecto de la comunidad"
+				},
+				{	
+					"tarea": "Estructurar el back",
+					"estado": "Finalizada",
+					"propietario": "Jesús",
+					"proyecto" : "Proyecto de la comunidad"
+				}]
+		}
+	]
+}
