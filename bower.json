@@ -1,0 +1,27 @@
+{
+  "name": "toDoBabel",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Kevin Oliva <kevin.oliva@babel.es>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/kivenoliva/toDoBabel",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.2",
+    "bootstrap": "^3.3.6",
+    "angular-route": "^1.5.2",
+    "moment": "^2.12.0",
+    "angular-sanitize": "^1.5.3",
+    "angular-PubSub": "angular.pubsub#*"
+  }
+}
