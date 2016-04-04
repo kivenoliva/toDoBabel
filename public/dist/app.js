@@ -36127,7 +36127,7 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 })(window, window.angular);
 
 ;//Defino el módulo "toDoBabel"
-angular.module("toDoBabel",['ngRoute']).config(
+angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 	["$routeProvider","paths", function($routeProvider,paths){
 		//Configuro las URLS de la app
 		$routeProvider
@@ -36163,7 +36163,7 @@ angular.module("toDoBabel",['ngRoute']).config(
 		//Scope EventListeners
 		$scope.$on("$locationChangeSuccess", function(event,currentRoute){
 			$scope.model.title = controller.titles[$location.path()] || "404 Not Found";
-			/*
+			
 			if(!autentication.getLogin()[0]){
 				console.log("No estas logeado");
 				//$scope.$emit("alLogin");
@@ -36173,30 +36173,39 @@ angular.module("toDoBabel",['ngRoute']).config(
 			}else{
 				console.log("Estas logueado con usuario : ",autentication.getLogin()[1] );
 			}
-			*/
+			
 		});
 		
-
 	}]
 );
 ;angular.module("toDoBabel").controller("LoginController",
-	["$scope","$location","paths", "autentication", function($scope,$location,paths, autentication){
-		
-		// Scope init
-		$scope.uiState = "loading";
-		$scope.model = {};
-		$scope.user = [];
+    ["$scope","$location","paths", "autentication", function($scope,$location,paths, autentication){
 
-		// Scope init
-		/*
-		$scope.login = function(){
-			autentication.setLogin($scope.model.name,true);
+        // Scope init
+        $scope.uiState = "loading";
+        $scope.model = {};
+        $scope.user = [];
+        $scope.registro = "";
+
+
+        // Scope methods
+        $scope.login = function(){
+            console.log("Me pinchan en login");
+            $scope.registro = false;
+            /*
+            autentication.setLogin($scope.model.name,true);
             console.log("Acabo de loguearme con el usuario : ", $scope.model.name);
             pubSub.publish();
-			$location.url(paths.listado);			
-		};
-		*/
-	}]
+            $location.url(paths.listado);           
+            */
+        };
+
+        $scope.registro = function(){
+            console.log("Me pinchan en registro");
+            $scope.registro = true;
+        };
+        
+    }]
 );
 ;angular.module("toDoBabel").service("autentication", ["$log", function($log){
 	
@@ -36206,8 +36215,7 @@ angular.module("toDoBabel",['ngRoute']).config(
 
 		var user = localStorage.getItem("usuarioLogueado");
 		console.log(user);
-		if( user == ""){
-			console.log("ENTRA");
+		if( user == null ){
 			userLoginApp[0] = false;
 			userLoginApp[1] = "";
 		}else{

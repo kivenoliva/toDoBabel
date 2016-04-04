@@ -18,7 +18,7 @@ angular.module("toDoBabel").controller("AppController",
 		//Scope EventListeners
 		$scope.$on("$locationChangeSuccess", function(event,currentRoute){
 			$scope.model.title = controller.titles[$location.path()] || "404 Not Found";
-			/*
+			
 			if(!autentication.getLogin()[0]){
 				console.log("No estas logeado");
 				//$scope.$emit("alLogin");
@@ -28,9 +28,8 @@ angular.module("toDoBabel").controller("AppController",
 			}else{
 				console.log("Estas logueado con usuario : ",autentication.getLogin()[1] );
 			}
-			*/
+			
 		});
 		
-
 	}]
 );

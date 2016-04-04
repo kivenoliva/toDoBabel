@@ -6724,3 +6724,6 @@ button.close {
     display: none !important;
   }
 }
+.boton-registro {
+  margin-right: 15px;
+}

@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose'); 
@@ -19,9 +21,9 @@ function selecTareas(proyectos, user){
     //Ahora filtro solo para sus tareas de cada proyecto
     var tareasUser = [];
 
-    for (i = 0 ; i < arrayProyectosSelecc.length ; i++){
+    for (var i = 0 ; i < arrayProyectosSelecc.length ; i++){
 
-        for (j = 0; j < arrayProyectosSelecc[i].tareas.length; j++){
+        for (var j = 0; j < arrayProyectosSelecc[i].tareas.length; j++){
             if(arrayProyectosSelecc[i].tareas[j].propietario == user){
                 tareasUser.push(arrayProyectosSelecc[i].tareas[j]);
             }

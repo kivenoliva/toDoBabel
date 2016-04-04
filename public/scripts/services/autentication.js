@@ -6,8 +6,7 @@ angular.module("toDoBabel").service("autentication", ["$log", function($log){
 
 		var user = localStorage.getItem("usuarioLogueado");
 		console.log(user);
-		if( user == ""){
-			console.log("ENTRA");
+		if( user == null ){
 			userLoginApp[0] = false;
 			userLoginApp[1] = "";
 		}else{

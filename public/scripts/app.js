@@ -1,5 +1,5 @@
 //Defino el módulo "toDoBabel"
-angular.module("toDoBabel",['ngRoute']).config(
+angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 	["$routeProvider","paths", function($routeProvider,paths){
 		//Configuro las URLS de la app
 		$routeProvider

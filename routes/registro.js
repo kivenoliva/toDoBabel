@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose'); 
@@ -13,7 +15,7 @@ function nombreUnico (nombre, callback){
             callback(err);
             return;
         }
-        console.log("ROWS", rows);
+        
         if(rows.length == 0){
             callback(null, true);
 
@@ -165,7 +167,7 @@ router.post("/", function(req, res, next) {
             }
 
             //hasheo la contraseña
-            clave_hash = sha256(req.body.clave);
+            var clave_hash = sha256(req.body.clave);
 
             //Instanciamos objeto en memoria, SOLO en memoria
             var objUsuario = {
