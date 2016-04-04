@@ -25,8 +25,6 @@ function nombreUnico (nombre, callback){
 };
 
 
-
-
 //Método get que devuelve una lista con todos los proyectos de la empresa, por si fuera necesario.
 router.get('/', function(req, res, next) {
     var query = Proyecto.find({});
@@ -70,26 +68,31 @@ router.put('/', function(req, res, next) {
 
     var new_proyecto = {
         
-        "nombre": req.body.nombre,
-        "miembros": req.body.miembros,
-        "tareas": req.body.tareas
+        nombre: req.body.nombre,
+        miembros: req.body.miembros,
+        tareas: req.body.tareas,
+        fecha_creación: req.body.fecha_creación,
+        _id: req.body._id
     }
-    
-    console.log(new_proyecto);
     
     new_proyecto = new Proyecto(new_proyecto);
 
     var query = Proyecto.remove({_id: req.body._id});
     query.exec(function(err, rows){
         if (err){
-            res.json({result: false, err: "Error al obtener proyecto222 de la base de datos."});
+            res.json({result: false, err: "Error al obtener proyecto de la base de datos."});
+            return;
+        }
+
+        if (rows.result.n == 0){
+            res.json({result: false, err: "El proyecto a actualizar no existe. Revisa o haz un post"});
             return;
         }
 
         console.log("ELIMINADO PROYECTO");
         new_proyecto.save(function(err, newRow){
             if(err){
-                console.log("ERROR AL GUARDAR");
+                res.json({result: false, err: "Error al guardar el proyecto"});
                 return;
             }
             console.log("Guardado nuevo proyecto");
@@ -101,17 +104,23 @@ router.put('/', function(req, res, next) {
 });
 
 //Método delete que borra un proyecto
-router.delete('/:nombre', function(req, res, next) {
+router.delete('/', function(req, res, next) {
 
-    Proyecto.remove({nombre: req.params.nombre}, function(err) {
-            if (err) {
-                console.log("ERROR AL ELIMINAR PROYECTO");
-                return;
-            }
-            res.json({result: true, rows: "Borrado correctamente"});
+    Proyecto.remove({nombre: req.body.nombre}, function(err, rows) {
+        if (err) {
+            res.json({result: false, err: "Error al eliminar el proyecto."});
             return;
+        }
+
+        if (rows.result.n == 0){
+            res.json({result: false, err: "El proyecto a borrar no existe. Revisa el nombre"});
+            return;
+        }
+
+        res.json({result: true, rows: "Borrado correctamente"});
+        return;
     });
-    
+
 });
 
 //Método post que añade un proyecto nuevo
@@ -134,14 +143,15 @@ router.post('/', function(req, res, next) {
         var new_proyecto = {
             nombre: req.body.nombre,
             miembros: req.body.miembros,
-            tareas: req.body.tareas
+            tareas: req.body.tareas,
+            fecha_creación: req.body.fecha_creación
         }
 
         new_proyecto = new Proyecto(new_proyecto);
 
         new_proyecto.save(function(err, newRow){
             if(err){
-                console.log("ERROR AL GUARDAR");
+                res.json({result: false, err: "Error al guardar el proyecto"});
                 return;
             }
             console.log("Guardado nuevo proyecto");

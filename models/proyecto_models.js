@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var proyectoSchema = mongoose.Schema({
 	nombre: String,
 	miembros: [String],
+	fecha_creación: String,
 	tareas:[{ tarea: String, estado: String, propietario:String, proyecto:String }]	
 });
 

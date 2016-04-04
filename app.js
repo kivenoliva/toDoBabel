@@ -35,12 +35,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use("/login", login);
-app.use("/registro", registro);
-app.use("/proyectos", proyectos);
-app.use("/tareas", tareas);
+app.use('/api', routes);
+app.use('/api/users', users);
+app.use("/api/login", login);
+app.use("/api/registro", registro);
+app.use("/api/proyectos", proyectos);
+app.use("/api/tareas", tareas);
 
 
 // catch 404 and forward to error handler

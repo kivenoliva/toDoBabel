@@ -60,6 +60,10 @@ function unSoloUser (reqbody){
         return [false, {result: false, err: "Has metido dos claves, sólo puedes meter un usuario a la vez"}];
     }
 
+    if (reqbody.url_imagen instanceof Array){
+        return [false, {result: false, err: "Has metido dos imágenes, sólo puedes meter un usuario a la vez"}];
+    }
+
     return[true, ""];
 };
 
@@ -113,7 +117,7 @@ router.post("/", function(req, res, next) {
     var nombreOK = "";
     var emailRepetido = "";
 
-    /*Compruebo que vienen los 3 campos obligatorios*/
+    /*Compruebo que vienen los 4 campos obligatorios*/
     if (!camposObligatorios(req.body)[0]){
         res.json(camposObligatorios(req.body)[1]);
         return;
