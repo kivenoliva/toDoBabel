@@ -9,6 +9,10 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				templateUrl: 'views/Proyectos.html'
 			}).when(paths.login, {
 				templateUrl: 'views/Login.html'
+			}).when(paths.registro, {
+				templateUrl: 'views/Registro.html'
+			}).when(paths.erroresLogin, {
+				templateUrl: 'views/ErroresLogin.html'
 			}).otherwise({
 				templateUrl: 'views/404.html'
 			})

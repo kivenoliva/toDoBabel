@@ -25,7 +25,7 @@ router.post("/", function(req, res, next) {
         //Ha ido bien la búsqueda, puede que me den resultados o no.
         if (rows.length === 0){
             console.log("Ese usuario no está en la base de datos");
-            res.json({result: false, rows: "No estás registrado, debes registrarte"});
+            res.json({result: false, err: "No estás registrado, debes registrarte"});
             return;
         }
 
@@ -41,11 +41,11 @@ router.post("/", function(req, res, next) {
 
         if ( passEnterHasheada !== passUserDB){
   
-            res.json({result: false, rows: "Nombre existente, pero contraseña incorrecta"});
+            res.json({result: false, err: "Nombre existente, pero contraseña incorrecta"});
             return;
         };
 
-        res.json({result: true, rows: rows});   //El usuario estaba registrado
+        res.json({result: true, rows: rows[0]});   //El usuario estaba registrado
         return;
 
     })

@@ -1,0 +1,61 @@
+<div ng-controller="RegistroController">
+    <h1>Registro</h1>
+    <form name="formularioRegistro" novalidate class="form-horizontal">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <label for="nombre" class="col-sm-2 control-label">Nombre</label>
+                <div class="col-sm-10" >
+                    <input type="text" name="nombre" class="form-control" ng-model="model.nombre" required>
+                    <div ng-show="formularioRegistro.nombre.$dirty && formularioRegistro.nombre.$error.required" class="alert alert-danger alert-dismissible" role="alert">
+                      <strong>El nombre es obligatorio</strong> 
+                    </div>
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <label for="clave" class="col-sm-2 control-label">Clave</label>
+                <div class="col-sm-10">
+                    <input type="password" name="clave" ng-model="model.clave" class="form-control" required>
+                    <div ng-show="formularioRegistro.clave.$dirty && formularioRegistro.clave.$error.required" class="alert alert-danger alert-dismissible" role="alert">
+                      <strong>La clave es obligatoria</strong> 
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="form-group">
+                <label for="foto" class="col-sm-2 control-label">Foto</label>
+                <div class="col-sm-10">
+                    <input type="url" name="foto" ng-model="model.foto" class="form-control" required>
+                    <div ng-show="formularioRegistro.foto.$dirty && formularioRegistro.foto.$error.required" class="alert alert-danger alert-dismissible" role="alert">
+                      <strong>La foto es obligatoria.</strong> 
+                    </div>
+                    <div class="alert alert-warning alert-dismissible" role="alert" ng-show="formularioRegistro.foto.$dirty && formularioRegistro.foto.$error.url">
+                        <strong>Porfavor, escriba una URL correcta.</strong>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" name="email" ng-model="model.email" class="form-control" required>
+                    <div ng-show="formularioRegistro.email.$dirty && formularioRegistro.email.$error.required" class="alert alert-danger alert-dismissible" role="alert">
+                      <strong>El email es obligatorio.</strong> 
+                    </div>
+                    <div class="alert alert-warning alert-dismissible" role="alert" ng-show="formularioRegistro.email.$dirty && formularioRegistro.email.$error.email">
+                        <strong>Porfavor, escriba un email correcto.</strong>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div>
+                <button class="btn btn-primary pull-right" ng-disabled="formularioRegistro.$invalid" ng-click="registro()">Registrarse</button>
+                <button class="btn btn-primary pull-right boton-registro" ng-click="loginRegistro()">Volver al Login</button>
+            </div>
+        </div>
+
+    </form>
+</div>

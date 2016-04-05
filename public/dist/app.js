@@ -36137,6 +36137,10 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				templateUrl: 'views/Proyectos.html'
 			}).when(paths.login, {
 				templateUrl: 'views/Login.html'
+			}).when(paths.registro, {
+				templateUrl: 'views/Registro.html'
+			}).when(paths.erroresLogin, {
+				templateUrl: 'views/ErroresLogin.html'
 			}).otherwise({
 				templateUrl: 'views/404.html'
 			})
@@ -36152,31 +36156,89 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		controller.titles[paths.home] = "Películas Babel";
 		controller.titles[paths.proyectos] = "Proyectos de la empresa";
 		controller.titles[paths.login] = "Login";
+		controller.titles[paths.registro] = "Registro";
+
 
 
 		//Model init
 		$scope.model = {
 			title: ""
 		};
+		$scope.notLogin = false;
+		$scope.mensajesErrorLogin = "";
 
-		
-		//Scope EventListeners
+		$scope.$on("EstoyEnLogin", function(event, data) {
+			$scope.$broadcast("Login", $scope);
+		});
+
+		$scope.$on("NoEstoyLogin", function(event, data) {
+			$scope.$broadcast("NoLogin", $scope);
+		});
+
+		$scope.$on("MandoARegistro", function(event, data) {
+		// event contiene datos propios del evento
+		// data contiene los datos adjuntos procedentes del scope hijo
+			$scope.notLogin = true;
+			$location.url(paths.registro);
+		});
+
+		$scope.$on("ErroresLogin", function(event, data) {
+		// event contiene datos propios del evento
+		// data contiene los datos adjuntos procedentes del scope hijo
+			$scope.notLogin = true;
+			$scope.mensajesErrorLogin = data;
+			$location.url(paths.erroresLogin);
+		});
+
+		$scope.$on("VuelvoALogin", function(event, data) {
+		// event contiene datos propios del evento
+		// data contiene los datos adjuntos procedentes del scope hijo
+			$scope.notLogin = false;
+			$location.url(paths.login);
+		});
+
+		$scope.$on("TerminoRegistro", function(event, data) {
+		// event contiene datos propios del evento
+		// data contiene los datos adjuntos procedentes del scope hijo
+			$scope.notLogin = false;
+		});
+
 		$scope.$on("$locationChangeSuccess", function(event,currentRoute){
 			$scope.model.title = controller.titles[$location.path()] || "404 Not Found";
-			
-			if(!autentication.getLogin()[0]){
+
+			if(!autentication.getLoginLocal()[0] && !$scope.notLogin){
 				console.log("No estas logeado");
 				//$scope.$emit("alLogin");
 				$location.url(paths.login);
 
 				
 			}else{
-				console.log("Estas logueado con usuario : ",autentication.getLogin()[1] );
-			}
-			
+				console.log("Estas logueado con usuario : ",autentication.getLoginLocal()[1] );
+			}			
 		});
 		
 	}]
+);
+;angular.module("toDoBabel").controller("ErroresLoginController",
+    ["$scope","$location","paths", "autentication", function($scope,$location,paths, autentication){
+
+        // Scope init
+        $scope.uiState = "loading";
+        $scope.mensaje = $scope.$parent.mensajesErrorLogin;
+        console.log("Errores controller");
+
+        $scope.loginErrores = function(){
+
+            console.log("Volvemos al Login");
+            $scope.$emit("VuelvoALogin", $scope);
+        };
+
+        $scope.registroErrores = function(){
+            console.log("Me pinchan en registro");
+            $scope.$emit("MandoARegistro", $scope);
+        };
+        
+    }]
 );
 ;angular.module("toDoBabel").controller("LoginController",
     ["$scope","$location","paths", "autentication", function($scope,$location,paths, autentication){
@@ -36184,14 +36246,39 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
         // Scope init
         $scope.uiState = "loading";
         $scope.model = {};
-        $scope.user = [];
-        $scope.registro = "";
+        $scope.user = {};
 
+        $scope.$emit("EstoyEnLogin", $scope);
 
         // Scope methods
         $scope.login = function(){
+
             console.log("Me pinchan en login");
-            $scope.registro = false;
+            //Contruyo objeto que paso a la API
+            var datos_login = {};
+            datos_login.nombre = $scope.model.name;
+            datos_login.clave = $scope.model.password;
+
+            //Scope start
+            autentication.getLogin(datos_login).then(
+                //postMessage(Message, transferList)cula encontrada
+                function(data){
+                    if(!data.result){
+                        $scope.$emit("ErroresLogin", data.err);
+                    }else{
+                        //Como estoy logueado, me lo guardo en local para mi navegador
+                        $scope.user = data.rows;
+                        autentication.setLoginLocal(data.rows.nombre,true);
+                        $scope.$emit("NoEstoyLogin", $scope);
+                        $location.url(paths.proyectos);
+                    }
+                    
+                }, 
+                //Pelicula no encontrada
+                function(error){
+                    $location.url(paths.notFound);
+                }
+            );
             /*
             autentication.setLogin($scope.model.name,true);
             console.log("Acabo de loguearme con el usuario : ", $scope.model.name);
@@ -36200,36 +36287,183 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
             */
         };
 
-        $scope.registro = function(){
+        $scope.registroLogin = function(){
             console.log("Me pinchan en registro");
-            $scope.registro = true;
+            $scope.$emit("MandoARegistro", $scope);
         };
         
     }]
 );
-;angular.module("toDoBabel").service("autentication", ["$log", function($log){
-	
-	var userLoginApp = [false, ""];
+;angular.module("toDoBabel").controller("MenuController",
+	["$scope", "$location", "autentication", "paths", function($scope, $location, autentication, paths){
 
-	this.getLogin = function(){
+		//Scope init
+		$scope.model = {
+			selectedItem: paths.listado
+		};
+		$scope.paths = paths;
+		$scope.view = "";
 
-		var user = localStorage.getItem("usuarioLogueado");
-		console.log(user);
-		if( user == null ){
-			userLoginApp[0] = false;
-			userLoginApp[1] = "";
-		}else{
-			userLoginApp[0] = true;
-			userLoginApp[1] = user;
+		$scope.$on("Login", function(event, data) {
+			$scope.view = "login";
+		});
+		$scope.$on("NoLogin", function(event, data) {
+			$scope.view = "";
+		});
+
+		//Scope methods
+		$scope.getClassForItem = function(item){
+			if($scope.model.selectedItem == item){
+				return "active";
+			}else{
+				return "";
+			}
 		}
-		return userLoginApp;
+		$scope.logout = function(){
 
+			autentication.logoutLocal();
+			console.log("He hecho logout");
+			$location.url(paths.login);			
+		};
+		//Scope event listeners
+		$scope.$on("$locationChangeSuccess", function(event,currentRoute){	
+			$scope.model.selectedItem = $location.path();	
+		});
+
+		
+		
+	}]
+);
+;angular.module("toDoBabel").controller("RegistroController",
+	["$scope", "$location", "autentication", "paths", function($scope, $location, autentication, paths){
+
+		$scope.model = {};
+		$scope.successMessage = null;
+		$scope.errorMessage = null;
+		$scope.userRegistrado = {};
+
+		console.log("Registro controller");
+		$scope.$emit("EstoyEnLogin", $scope);
+
+		$scope.registro = function(){
+
+			var datos_registro = {};
+			datos_registro.nombre = $scope.model.nombre;
+			datos_registro.clave = $scope.model.clave;
+			datos_registro.url_imagen = $scope.model.foto;
+			datos_registro.email = $scope.model.email;			
+
+			autentication.registro(datos_registro).then(
+                //postMessage(Message, transferList)cula encontrada
+                function(data){
+                	console.log(data);
+                    if(!data.result){
+                    	console.log("ERRORRRRRR");
+                        $scope.$emit("ErroresLogin", data.rows);
+                    }else{
+                        //Como estoy logueado, me lo guardo en local para mi navegador
+                        console.log(data);
+                        $scope.userRegistrado = data.rows;
+                        autentication.setLoginLocal(data.rows.nombre,true);
+                        $scope.$emit("TerminoRegistro", $scope);
+                        $scope.$emit("NoEstoyLogin", $scope);
+                        $location.url(paths.proyectos);
+                    }
+                    
+                }, 
+                //Pelicula no encontrada
+                function(error){
+                    $location.url(paths.notFound);
+                }
+            );			
+
+		};
+
+		$scope.loginRegistro = function(){
+
+			$scope.$emit("VuelvoALogin", $scope);
+		};
+		
+	}]
+);
+;angular.module("toDoBabel").service("autentication", ["$http", "$log", "api_paths", "$q", function($http, $log, api_paths, $q){
+	
+	var userLogin = [false, ""];
+
+
+	this.getLoginLocal = function(){
+		var user = localStorage.getItem("usuarioLogueado");
+		if( user == ""){
+			userLogin[0] = false;
+			userLogin[1] = "";
+		}else{
+			userLogin[0] = true;
+			userLogin[1] = user;
+		}
+		return userLogin;
+	};
+
+	this.setLoginLocal = function(user,bool){
+		userLogin[0] = bool;
+		userLogin[1] = user;
+		localStorage.setItem("usuarioLogueado", user);
+
+	};
+
+	this.logoutLocal = function(){
+		userLogin[0] = false;
+		userLogin[1] = "";
+		localStorage.setItem("usuarioLogueado", "");
+	};
+
+
+	this.registro = function(datos_registro){
+		//Crear el objeto diferido
+		var deferred = $q.defer();
+		//Hacer trabajo asíncrono
+		$http.post(api_paths.registro,datos_registro).then(
+		    function(response){
+		            //resolver la promesa
+		            deferred.resolve(response.data);
+		    },
+		    function(response){
+		            //rechazar la promesa
+		            deferred.reject(response.data);
+		    }
+		);
+		//devolver la promesa
+		return deferred.promise; 
+	};
+
+	this.getLogin = function(datos_login){
+		
+		//Crear el objeto diferido
+		var deferred = $q.defer();
+		//Hacer trabajo asíncrono
+		$http.post(api_paths.login,datos_login).then(
+		    function(response){
+		            //resolver la promesa
+		            deferred.resolve(response.data);
+		    },
+		    function(response){
+		            //rechazar la promesa
+		            deferred.reject(response.data);
+		    }
+		);
+		//devolver la promesa
+		return deferred.promise; 
 	};
 
 	
 }]);
+;angular.module("toDoBabel").value("api_paths", {
+	login: "/api/login",
+	registro: "/api/registro"
+});
 ;angular.module("toDoBabel").constant("paths",{
 	home: "/",
 	proyectos: "/proyectos",
-	login: "/login"
+	login: "/login",
+	registro: "/registro",
+	erroresLogin: "/erroresLogin"
 });

@@ -185,7 +185,7 @@ router.post("/", function(req, res, next) {
                     res.json({result:false, err:err});
                     return;
                 }
-                res.json({result:true, row: newRow});
+                res.json({result:true, rows: newRow});
                 return;
             });
         });
