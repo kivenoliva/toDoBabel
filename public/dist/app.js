@@ -36334,6 +36334,40 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		
 	}]
 );
+;angular.module("toDoBabel").controller("ProyectosController",
+	["$scope", "$location", "autentication", "paths", "APIClient", function($scope, $location, autentication, paths, APIClient){
+		
+		$scope.uiState = "loading";
+		$scope.model = [];
+		$scope.usuario = autentication.getLogin()[1];
+
+
+		// Controller start
+		APIClient.getProyectos().then(
+
+			//primero siempre el succes
+			function(data){
+				console.log(data);
+				$scope.model = data.rows;
+				
+				if($scope.model.length == 0){
+					$scope.uiState = "blank";
+				}else{
+					$scope.uiState = "ideal";
+				}
+				
+			},
+
+			//segundo si ha habido error
+			function(data){
+				$log.error("Error", data);
+				$scope.uiState = "error";
+			}
+		);
+
+
+	}]
+);
 ;angular.module("toDoBabel").controller("RegistroController",
 	["$scope", "$location", "autentication", "paths", function($scope, $location, autentication, paths){
 
@@ -36385,6 +36419,44 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		};
 		
 	}]
+);
+;angular.module("toDoBabel").filter("join",
+    ["$log", function($log){
+        return function(arr, sep){
+            var items = arr || null;
+            var separator = sep || ", ";
+            if (items == null)
+                return "";
+            if (typeof arr.join === "undefined") {
+                $log.error("The value passed to the filter 'join' must be an array.")
+                return "";
+            }
+            return arr.join(separator);
+        };
+    }]
+);
+;angular.module("toDoBabel").service("APIClient", 
+    ["$http", "$q", "api_paths", function($http, $q, api_paths){
+
+        
+        this.getProyectos = function(){
+        //Crear el objeto diferido
+        var deferred = $q.defer();
+        //Hacer trabajo asíncrono
+        $http.get(api_paths.proyectos).then(
+            function(response){
+                    //resolver la promesa
+                    deferred.resolve(response.data);
+            },
+            function(response){
+                    //rechazar la promesa
+                    deferred.reject(response.data);
+            }
+        );
+        //devolver la promesa
+        return deferred.promise; 
+    };
+    }]
 );
 ;angular.module("toDoBabel").service("autentication", ["$http", "$log", "api_paths", "$q", function($http, $log, api_paths, $q){
 	
@@ -36458,7 +36530,8 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 }]);
 ;angular.module("toDoBabel").value("api_paths", {
 	login: "/api/login",
-	registro: "/api/registro"
+	registro: "/api/registro",
+	proyectos: "/api/proyectos"
 });
 ;angular.module("toDoBabel").constant("paths",{
 	home: "/",

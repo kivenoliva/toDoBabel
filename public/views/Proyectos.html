@@ -1,1 +1,35 @@
-<h1>proyectos</h1>
+<div ng-controller="ProyectosController">
+
+	<div ng-include="'views/progressBar.html'" ng-show="uiState == 'loading'"></div>
+
+	<div class="jumbotron" ng-show="uiState == 'blank'">
+		<p class="lead">No existen datos.</p>
+	</div>   
+
+	<!--
+    <ul>
+    <li ng-repeat="x in model">
+      {{ x.tareas }}
+    </li>
+  	</ul>
+	-->
+	<ul class="media-list" ng-repeat="x in model">
+	  <li class="media">
+	    <div class="media-left">
+	      <a href="">
+	      	<img ng-src="http://www.babel.es/sites/default/files/imageblock/logo.png" width="100">	        
+	      </a>
+	    </div>
+	    <div class="media-body">
+	      <h3 class="media-heading">Nombre del proyecto: <strong>{{ x.nombre }}</strong></h3>
+	      <h5>Fecha de creación: {{::x.fecha }}</h5>
+	      <h5>Miembros: {{ x.miembros | join }}</h5>
+	      <button class="btn btn-primary" ng-click="">Ver proyecto en detalle</button>
+	    </div>
+	    <br>
+	    <br>
+	    <br>
+	  </li>
+	</ul>
+
+</div>

@@ -57,7 +57,7 @@ function borrarTarea(proyecto, tarea, res){
         nombre: proyecto[0].nombre,
         miembros: proyecto[0].miembros,
         tareas: tareasNuevas,
-        fecha_creación: proyecto[0].fecha_creación,
+        fecha: proyecto[0].fecha,
         _id: proyecto[0]._id
     }
 
@@ -153,7 +153,7 @@ router.put('/', function(req, res, next) {
             nombre: rows[0].nombre,
             miembros: rows[0].miembros,
             tareas: tareasNuevas,
-            fecha_creación: rows[0].fecha_creación,
+            fecha: rows[0].fecha,
             _id: rows[0]._id
         }
 
@@ -234,7 +234,7 @@ router.post('/', function(req, res, next) {
         var proyectoModificado = {
             nombre: rows[0].nombre,
             miembros: rows[0].miembros,
-            fecha_creación: rows[0].fecha_creación,
+            fecha: rows[0].fecha,
             tareas: tareasNuevas,
             _id: rows[0]._id
         }

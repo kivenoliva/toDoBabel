@@ -73,7 +73,7 @@ router.put('/', function(req, res, next) {
         nombre: req.body.nombre,
         miembros: req.body.miembros,
         tareas: req.body.tareas,
-        fecha_creación: req.body.fecha_creación,
+        fecha: req.body.fecha,
         _id: req.body._id
     }
     
@@ -146,7 +146,7 @@ router.post('/', function(req, res, next) {
             nombre: req.body.nombre,
             miembros: req.body.miembros,
             tareas: req.body.tareas,
-            fecha_creación: req.body.fecha_creación
+            fecha: req.body.fecha
         }
 
         new_proyecto = new Proyecto(new_proyecto);
