@@ -36141,6 +36141,10 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				templateUrl: 'views/Registro.html'
 			}).when(paths.erroresLogin, {
 				templateUrl: 'views/ErroresLogin.html'
+			}).when(paths.proyectosUser, {
+				templateUrl: 'views/ProyectosUsuario.html'
+			}).when(paths.tareasUser, {
+				templateUrl: 'views/TareasUsuario.html'
 			}).otherwise({
 				templateUrl: 'views/404.html'
 			})
@@ -36299,7 +36303,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 
 		//Scope init
 		$scope.model = {
-			selectedItem: paths.listado
+			selectedItem: paths.proyectos
 		};
 		$scope.paths = paths;
 		$scope.view = "";
@@ -36337,10 +36341,20 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 ;angular.module("toDoBabel").controller("ProyectosController",
 	["$scope", "$location", "autentication", "paths", "APIClient", function($scope, $location, autentication, paths, APIClient){
 		
+		//Scope init
 		$scope.uiState = "loading";
 		$scope.model = [];
 		$scope.usuario = autentication.getLogin()[1];
 
+
+		// Scope methods
+		$scope.proyectoDetalle = function(){
+			console.log("PINCHAN DETALLE");
+			//$location.url(paths.notFound);
+			//Hacer luego el detalle
+
+
+		};
 
 		// Controller start
 		APIClient.getProyectos().then(
@@ -36349,7 +36363,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 			function(data){
 				console.log(data);
 				$scope.model = data.rows;
-				
+
 				if($scope.model.length == 0){
 					$scope.uiState = "blank";
 				}else{
@@ -36538,5 +36552,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 	proyectos: "/proyectos",
 	login: "/login",
 	registro: "/registro",
-	erroresLogin: "/erroresLogin"
+	erroresLogin: "/erroresLogin",
+	proyectosUser: "/proyectosUsuarios",
+	tareasUser: "/tareasUsuario"
 });

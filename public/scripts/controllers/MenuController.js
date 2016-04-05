@@ -3,7 +3,7 @@ angular.module("toDoBabel").controller("MenuController",
 
 		//Scope init
 		$scope.model = {
-			selectedItem: paths.listado
+			selectedItem: paths.proyectos
 		};
 		$scope.paths = paths;
 		$scope.view = "";

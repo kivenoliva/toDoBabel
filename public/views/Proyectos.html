@@ -22,9 +22,9 @@
 	    </div>
 	    <div class="media-body">
 	      <h3 class="media-heading">Nombre del proyecto: <strong>{{ x.nombre }}</strong></h3>
-	      <h5>Fecha de creación: {{::x.fecha }}</h5>
-	      <h5>Miembros: {{ x.miembros | join }}</h5>
-	      <button class="btn btn-primary" ng-click="">Ver proyecto en detalle</button>
+	      <h5><strong>Fecha de creación:</strong> {{::x.fecha }}</h5>
+	      <h5><strong>Miembros:</strong> {{ x.miembros | join }}</h5>
+	      <button class="btn btn-primary" ng-click="proyectoDetalle()">Ver proyecto en detalle</button>
 	    </div>
 	    <br>
 	    <br>
