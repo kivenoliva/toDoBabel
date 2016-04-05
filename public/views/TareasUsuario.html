@@ -1,1 +1,11 @@
-<h1>Tareas usuario</h1>
+<div ng-controller="TareasUsuarioController">
+
+	<div ng-include="'views/progressBar.html'" ng-show="uiState == 'loading'"></div>
+
+	<div class="jumbotron" ng-show="uiState == 'blank'">
+		<p class="lead">No existen datos.</p>
+	</div>   
+	
+	<tareas-items items="model" ng-show="uiState =='ideal'"  usuario="usuario"></tareas-items> 
+
+</div>

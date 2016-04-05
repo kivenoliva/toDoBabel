@@ -53,7 +53,7 @@ router.get('/:nombre', function(req, res, next) {
 
         var arrayProyectosSelecc = [];
         
-        for (i = 0 ; i < rows.length ; i++){
+        for (var i = 0 ; i < rows.length ; i++){
         	if(rows[i].miembros.indexOf(user) != -1){
         		arrayProyectosSelecc.push(rows[i]);
         	}

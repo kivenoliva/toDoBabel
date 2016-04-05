@@ -1,0 +1,29 @@
+<div>
+	
+	<h1 ng-hide="modo == 'proyectos_user'">Listado de los proyectos de la empresa: </h1>
+	<h1 ng-show="modo == 'proyectos_user'">Listado de los proyectos de {{usuario}}: </h1>
+	<br>
+    	<br>
+   	<br>
+
+	<ul class="media-list" ng-repeat="item in model">
+	  <li class="media lista-proyectos">
+	    <div class="media-left">
+	      <a href="">
+	      	<img ng-src="http://www.babel.es/sites/default/files/imageblock/logo.png" width="100">	        
+	      </a>
+	    </div>
+	    <div class="media-body">
+	      <h4 class="media-heading">Nombre del proyecto: <strong>{{ item.nombre }}</strong></h4>
+	      <p><strong>Fecha de creación:</strong> {{::item.fecha }}</p>
+	      <p><strong>Miembros:</strong> {{ item.miembros | join }}</p>
+	      <button class="btn btn-primary" ng-click="proyectoDetalle({stuff:item})" ng-show="modo == 'proyectos_user'">Ver proyecto en detalle</button>
+	    </div>
+	    <br>
+	    <br>
+	    <br>
+	  </li>
+	</ul>
+
+
+</div>

@@ -36217,7 +36217,12 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 
 				
 			}else{
-				console.log("Estas logueado con usuario : ",autentication.getLoginLocal()[1] );
+				if(autentication.getLoginLocal()[1] == null){
+					$scope.notLogin = false;
+					$location.url(paths.login);
+				}else{
+					console.log("Estas logueado con usuario : ",autentication.getLoginLocal()[1] );
+				}		
 			}			
 		});
 		
@@ -36347,18 +36352,8 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$scope.usuario = autentication.getLogin()[1];
 
 
-		// Scope methods
-		$scope.proyectoDetalle = function(){
-			console.log("PINCHAN DETALLE");
-			//$location.url(paths.notFound);
-			//Hacer luego el detalle
-
-
-		};
-
 		// Controller start
 		APIClient.getProyectos().then(
-
 			//primero siempre el succes
 			function(data){
 				console.log(data);
@@ -36379,6 +36374,51 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 			}
 		);
 
+
+	}]
+);
+;angular.module("toDoBabel").controller("ProyectosUsuarioController",
+	["$scope", "$location", "autentication", "paths", "APIClient", "$sce","$routeParams",
+	 function($scope, $location, autentication, paths, APIClient, $sce, $routeParams){
+		
+		//Scope init
+		$scope.uiState = "loading";
+		$scope.model = [];
+		$scope.usuario = autentication.getLoginLocal()[1];
+
+
+		// Scope methods
+		$scope.proyectoDetalle = function(){
+			console.log("PINCHAN DETALLE");
+			//$location.url(paths.notFound);
+			//Hacer luego el detalle
+
+
+		};
+		
+		// Controller start
+		APIClient.getProyectosUsuario($scope.usuario).then(
+
+			//primero siempre el succes
+			function(data){
+				console.log(data);
+				$scope.model = data.rows;
+
+				if($scope.model.length == 0){
+					$scope.uiState = "blank";
+				}else{
+					$scope.uiState = "ideal";
+				}
+				
+			},
+
+			//segundo si ha habido error
+			function(data){
+				$log.error("Error", data);
+				$scope.uiState = "error";
+			}
+		);
+		
 
 	}]
 );
@@ -36434,6 +36474,63 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		
 	}]
 );
+;angular.module("toDoBabel").controller("TareasUsuarioController",
+	["$scope", "$location", "autentication", "paths", "APIClient", "$sce","$routeParams",
+	 function($scope, $location, autentication, paths, APIClient, $sce, $routeParams){
+		
+		//Scope init
+		$scope.uiState = "loading";
+		$scope.model = [];
+		$scope.usuario = autentication.getLoginLocal()[1];
+		
+		// Controller start
+		APIClient.getTareasUsuario($scope.usuario).then(
+
+			//primero siempre el succes
+			function(data){
+				console.log(data);
+				$scope.model = data.rows;
+
+				if($scope.model.length == 0){
+					$scope.uiState = "blank";
+				}else{
+					$scope.uiState = "ideal";
+				}
+				
+			},
+
+			//segundo si ha habido error
+			function(data){
+				$log.error("Error", data);
+				$scope.uiState = "error";
+			}
+		);
+		
+
+	}]
+);
+;angular.module("toDoBabel").directive("proyectosItems", function(){
+	return {
+		restrict:"AE",
+		scope: {
+			model:"=items",
+			modo:"@",
+			proyectoDetalle: "&",
+			usuario:"="
+		},
+		templateUrl:"views/proyectosItems.html"
+	};
+});
+;angular.module("toDoBabel").directive("tareasItems", function(){
+	return {
+		restrict:"AE",
+		scope: {
+			model:"=items",
+			usuario:"="
+		},
+		templateUrl:"views/tareasItems.html"
+	};
+});
 ;angular.module("toDoBabel").filter("join",
     ["$log", function($log){
         return function(arr, sep){
@@ -36450,28 +36547,88 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
     }]
 );
 ;angular.module("toDoBabel").service("APIClient", 
-    ["$http", "$q", "api_paths", function($http, $q, api_paths){
+    ["$http", "$q", "api_paths", "URL","$log", function($http, $q, api_paths, URL, $log){
 
         
         this.getProyectos = function(){
-        //Crear el objeto diferido
-        var deferred = $q.defer();
-        //Hacer trabajo asíncrono
-        $http.get(api_paths.proyectos).then(
-            function(response){
-                    //resolver la promesa
-                    deferred.resolve(response.data);
-            },
-            function(response){
-                    //rechazar la promesa
-                    deferred.reject(response.data);
-            }
-        );
-        //devolver la promesa
-        return deferred.promise; 
-    };
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            $http.get(api_paths.proyectos).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+        
+        this.getProyectosUsuario = function(id){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            var urlBien  = URL.resolve(api_paths.proyectosUsuario, {id: id});
+            $http.get(urlBien).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+
+        this.getTareasUsuario = function(id){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            var urlBien  = URL.resolve(api_paths.tareasUsuario, {id: id});
+            $http.get(urlBien).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+    
     }]
 );
+;angular.module("toDoBabel").service("URL", ["$log",function($log){
+	this.resolve = function(url,params){
+		var finalURL = [];
+		var urlParts = url.split("/");
+		for (var i in urlParts){
+			var urlPart = urlParts[i];
+			if(urlPart.substr(0,1) == ":"){
+				var paramName = urlPart.substr(1);
+				var paramValue = params[paramName] || null;
+				if(paramValue == null){
+					$log.error("URL.resolve error: ",paramValue,"not found in params dict. Check your 'params' value bro.");
+					return;
+				}
+				finalURL.push(paramValue);
+			}else{
+				finalURL.push(urlPart);
+			}
+		}
+		return finalURL.join("/");
+	};
+}])
 ;angular.module("toDoBabel").service("autentication", ["$http", "$log", "api_paths", "$q", function($http, $log, api_paths, $q){
 	
 	var userLogin = [false, ""];
@@ -36545,7 +36702,9 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 ;angular.module("toDoBabel").value("api_paths", {
 	login: "/api/login",
 	registro: "/api/registro",
-	proyectos: "/api/proyectos"
+	proyectos: "/api/proyectos",
+	proyectosUsuario: "/api/proyectos/:id",
+	tareasUsuario: "api/tareas/:id"
 });
 ;angular.module("toDoBabel").constant("paths",{
 	home: "/",
@@ -36553,6 +36712,6 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 	login: "/login",
 	registro: "/registro",
 	erroresLogin: "/erroresLogin",
-	proyectosUser: "/proyectosUsuarios",
-	tareasUser: "/tareasUsuario"
+	proyectosUser: "/proyectos-usuario",
+	tareasUser: "/tareas-usuario"
 });

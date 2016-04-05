@@ -64,7 +64,12 @@ angular.module("toDoBabel").controller("AppController",
 
 				
 			}else{
-				console.log("Estas logueado con usuario : ",autentication.getLoginLocal()[1] );
+				if(autentication.getLoginLocal()[1] == null){
+					$scope.notLogin = false;
+					$location.url(paths.login);
+				}else{
+					console.log("Estas logueado con usuario : ",autentication.getLoginLocal()[1] );
+				}		
 			}			
 		});
 		

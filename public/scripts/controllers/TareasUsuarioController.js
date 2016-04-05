@@ -1,14 +1,15 @@
-angular.module("toDoBabel").controller("ProyectosController",
-	["$scope", "$location", "autentication", "paths", "APIClient", function($scope, $location, autentication, paths, APIClient){
+angular.module("toDoBabel").controller("TareasUsuarioController",
+	["$scope", "$location", "autentication", "paths", "APIClient", "$sce","$routeParams",
+	 function($scope, $location, autentication, paths, APIClient, $sce, $routeParams){
 		
 		//Scope init
 		$scope.uiState = "loading";
 		$scope.model = [];
-		$scope.usuario = autentication.getLogin()[1];
-
-
+		$scope.usuario = autentication.getLoginLocal()[1];
+		
 		// Controller start
-		APIClient.getProyectos().then(
+		APIClient.getTareasUsuario($scope.usuario).then(
+
 			//primero siempre el succes
 			function(data){
 				console.log(data);
@@ -28,7 +29,7 @@ angular.module("toDoBabel").controller("ProyectosController",
 				$scope.uiState = "error";
 			}
 		);
-
+		
 
 	}]
 );

@@ -1,0 +1,32 @@
+<h1>Tareas de {{usuario}}: </h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tarea</th>
+            <th>Proyecto</th>
+            <th>Propietario</th>                        
+            <th>Estado</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in model">
+            <td>
+                <h4>{{::item.tarea}}</h4>
+            </td>
+            <td>
+                <h4>{{::item.proyecto}}</h4>
+            </td>
+            <td>
+                <h4>{{::item.propietario}}</h4>
+            </td>
+            <td>
+                <h4><span class="label label-danger" >{{item.estado}}</span></h4>
+            </td>
+            <td>
+	    <button class="btn btn-primary pull-right boton-registro">Cambiar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -4,6 +4,6 @@ angular.module("toDoBabel").constant("paths",{
 	login: "/login",
 	registro: "/registro",
 	erroresLogin: "/erroresLogin",
-	proyectosUser: "/proyectosUsuarios",
-	tareasUser: "/tareasUsuario"
+	proyectosUser: "/proyectos-usuario",
+	tareasUser: "/tareas-usuario"
 });
