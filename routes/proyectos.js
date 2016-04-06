@@ -41,7 +41,7 @@ router.get('/', function(req, res, next) {
 });
 
 //Método que devuelve los proyectos de usuario metido
-router.get('/:nombre', function(req, res, next) {
+router.get('/usuario/:nombre', function(req, res, next) {
    var user = req.params.nombre;
 
     var query = Proyecto.find({});
@@ -60,6 +60,23 @@ router.get('/:nombre', function(req, res, next) {
         }
 
         res.json({result: true, rows: arrayProyectosSelecc});
+        return;
+    });
+
+});
+
+//Método que devuelve un proyecto por su id
+router.get('/:id', function(req, res, next) {
+   var user = req.params.nombre;
+
+    var query = Proyecto.find({_id: req.params.id});
+    query.exec(function(err, rows){
+        if (err){
+            res.json({result: false, err: "Error al obtener todos los proyectos de la base de datos."});
+            return;
+        }
+
+        res.json({result: true, rows: rows});
         return;
     });
 

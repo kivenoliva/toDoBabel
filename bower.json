@@ -22,6 +22,7 @@
     "angular-route": "^1.5.2",
     "moment": "^2.12.0",
     "angular-sanitize": "^1.5.3",
-    "angular-PubSub": "angular.pubsub#*"
+    "angular-PubSub": "angular.pubsub#*",
+    "sha256": "^0.2.0"
   }
 }

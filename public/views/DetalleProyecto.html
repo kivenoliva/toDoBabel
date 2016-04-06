@@ -1,0 +1,41 @@
+<div ng-controller="DetalleProyectoController">
+
+	<div ng-include="'views/progressBar.html'" ng-show="uiState == 'loading'"></div>
+
+	<div class="jumbotron" ng-show="uiState == 'blank'">
+		<p class="lead">No existen datos.</p>
+	</div>  
+	
+	<div class="container">
+		<h1 class="text-primary">{{model.nombre}}</h1>
+		<br>
+	</div>
+	
+	<div class="container">
+		<h2 class="text-primary">Miembros:</h2>
+		<h4>{{model.miembros | join}}</h4>
+		<button class="btn btn-primary" ng-click="">Ver en detalle los miembros</button>
+		<br>
+		<br>
+		<br>
+	</div>
+
+	<div class="container">
+		<h1 class="text-primary">Tareas del proyecto: </h1>
+		<tareas-items items="model.tareas" cambio-tarea="cambioTarea(stuff, user)" ng-show="uiState =='ideal'"  usuario="usuario"></tareas-items> 
+		<button class="btn btn-warning btn-detalle" ng-click="">Añadir una nueva tarea</button>
+		<br>
+		<br>
+		<br>
+	</div>
+	
+	<br>
+	<div class="container">
+		<button class="btn btn-primary btn-detalle" ng-click="volver()">Volver a tus proyectos</button>
+		<button class="btn btn-primary btn-warning" ng-click="modificarProyecto(model._id)">Modificar proyecto</button>
+	</div>
+	<br>
+	<br>
+
+</div>
+

@@ -11,7 +11,6 @@ angular.module("toDoBabel").controller("LoginController",
         // Scope methods
         $scope.login = function(){
 
-            console.log("Me pinchan en login");
             //Contruyo objeto que paso a la API
             var datos_login = {};
             datos_login.nombre = $scope.model.name;

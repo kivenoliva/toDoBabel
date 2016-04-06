@@ -11,7 +11,6 @@ angular.module("toDoBabel").controller("ProyectosController",
 		APIClient.getProyectos().then(
 			//primero siempre el succes
 			function(data){
-				console.log(data);
 				$scope.model = data.rows;
 
 				if($scope.model.length == 0){

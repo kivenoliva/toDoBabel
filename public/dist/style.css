@@ -6733,3 +6733,9 @@ button.close {
 .menu {
   background-color: white;
 }
+.boton-tarea {
+  margin-top: 3px;
+}
+.no-menu {
+  padding-top: 50px;
+}

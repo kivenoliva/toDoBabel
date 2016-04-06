@@ -1,10 +1,10 @@
-angular.module("toDoBabel").controller("TareasUsuarioController",
-	["$scope", "$location", "autentication", "paths", "APIClient", "$sce","$routeParams",
-	 function($scope, $location, autentication, paths, APIClient, $sce, $routeParams){
+angular.module("toDoBabel").controller("DetalleProyectoController",
+	["$scope", "$location", "autentication", "paths", "APIClient", "$routeParams", "URL",
+	 function($scope, $location, autentication, paths, APIClient, $routeParams, URL){
 		
 		//Scope init
 		$scope.uiState = "loading";
-		$scope.model = [];
+		$scope.model = {};
 		$scope.usuario = autentication.getLoginLocal()[1];
 
 		//Scope methods
@@ -38,17 +38,24 @@ angular.module("toDoBabel").controller("TareasUsuarioController",
 					$scope.uiState = "error";
 				}
 			);
-
-
 		};
 		
+		$scope.volver = function(){
+			$location.url(paths.proyectosUser);
+		}
+
+		$scope.modificarProyecto = function(id){
+			var urlBien = URL.resolve(paths.modificarProyecto, {id: id});
+			$location.url(urlBien);
+		}
+
 		// Controller start
-		APIClient.getTareasUsuario($scope.usuario).then(
+		APIClient.getProyectoId($routeParams.id).then(
 
 			//primero siempre el succes
 			function(data){
-				$scope.model = data.rows;
-
+				$scope.model = data.rows[0];
+				console.log($scope.model);
 				if($scope.model.length == 0){
 					$scope.uiState = "blank";
 				}else{

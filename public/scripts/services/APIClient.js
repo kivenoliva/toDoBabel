@@ -57,6 +57,44 @@ angular.module("toDoBabel").service("APIClient",
             //devolver la promesa
             return deferred.promise; 
         };
+
+        this.modificarTarea = function(tarea){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            //var urlBien  = URL.resolve(api_paths.tareasUsuario, {id: id});
+            $http.put(api_paths.modificarTarea, tarea).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+
+        this.getProyectoId = function(id){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            var urlBien  = URL.resolve(api_paths.detalleProyecto, {id: id});
+            $http.get(urlBien).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
     
     }]
 );

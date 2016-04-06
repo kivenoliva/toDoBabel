@@ -6,6 +6,7 @@
 		<p class="lead">No existen datos.</p>
 	</div>   
 	
-	<tareas-items items="model" ng-show="uiState =='ideal'"  usuario="usuario"></tareas-items> 
+	<h1 class="text-primary">Tareas de {{usuario}}: </h1>
+	<tareas-items items="model" cambio-tarea="cambioTarea(stuff, user)" ng-show="uiState =='ideal'"  usuario="usuario"></tareas-items> 
 
 </div>

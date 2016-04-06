@@ -3,7 +3,8 @@ angular.module("toDoBabel").directive("tareasItems", function(){
 		restrict:"AE",
 		scope: {
 			model:"=items",
-			usuario:"="
+			usuario:"=",
+			cambioTarea:"&"
 		},
 		templateUrl:"views/tareasItems.html"
 	};

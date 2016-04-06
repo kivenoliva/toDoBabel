@@ -1,28 +1,23 @@
 angular.module("toDoBabel").controller("ProyectosUsuarioController",
-	["$scope", "$location", "autentication", "paths", "APIClient", "$sce","$routeParams",
-	 function($scope, $location, autentication, paths, APIClient, $sce, $routeParams){
+	["$scope", "$location", "autentication", "paths", "APIClient", "$sce","$routeParams", "URL",
+	 function($scope, $location, autentication, paths, APIClient, $sce, $routeParams, URL){
 		
 		//Scope init
 		$scope.uiState = "loading";
 		$scope.model = [];
 		$scope.usuario = autentication.getLoginLocal()[1];
 
+		// Scope métodos
+		$scope.getMovieDetailURL = function(proyecto){
+            return URL.resolve(paths.detalleProyecto, {id: proyecto._id});
+        };
 
-		// Scope methods
-		$scope.proyectoDetalle = function(){
-			console.log("PINCHAN DETALLE");
-			//$location.url(paths.notFound);
-			//Hacer luego el detalle
-
-
-		};
 		
 		// Controller start
 		APIClient.getProyectosUsuario($scope.usuario).then(
 
 			//primero siempre el succes
 			function(data){
-				console.log(data);
 				$scope.model = data.rows;
 
 				if($scope.model.length == 0){

@@ -1,4 +1,3 @@
-<h1>Tareas de {{usuario}}: </h1>
 
 <table class="table table-striped">
     <thead>
@@ -19,13 +18,16 @@
                 <h4>{{::item.proyecto}}</h4>
             </td>
             <td>
-                <h4>{{::item.propietario}}</h4>
+                <h4>{{item.propietario}}</h4>
             </td>
             <td>
-                <h4><span class="label label-danger" >{{item.estado}}</span></h4>
+                <h4><span class="label label-danger" ng-if="item.estado == 'NoAsignada'">Sin asignar</span></h4>
+                <h4><span class="label label-success" ng-if="item.estado == 'Finalizada'">{{item.estado}}</span></h4>
+                <h4><span class="label label-primary" ng-if="item.estado == 'Empezada'">{{item.estado}}</span></h4>
             </td>
             <td>
-	    <button class="btn btn-primary pull-right boton-registro">Cambiar</button>
+	           <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
+               <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})">He terminado</button>
             </td>
         </tr>
     </tbody>

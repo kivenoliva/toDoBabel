@@ -36133,6 +36133,8 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$routeProvider
 			.when(paths.home, {
 				redirectTo: paths.proyectos
+			}).when(paths.detalleProyecto, {
+				templateUrl: 'views/DetalleProyecto.html'
 			}).when(paths.proyectos, {
 				templateUrl: 'views/Proyectos.html'
 			}).when(paths.login, {
@@ -36145,6 +36147,8 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				templateUrl: 'views/ProyectosUsuario.html'
 			}).when(paths.tareasUser, {
 				templateUrl: 'views/TareasUsuario.html'
+			}).when(paths.modificarProyecto, {
+				templateUrl: 'views/ModificarProyecto.html'
 			}).otherwise({
 				templateUrl: 'views/404.html'
 			})
@@ -36228,6 +36232,82 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		
 	}]
 );
+;angular.module("toDoBabel").controller("DetalleProyectoController",
+	["$scope", "$location", "autentication", "paths", "APIClient", "$routeParams", "URL",
+	 function($scope, $location, autentication, paths, APIClient, $routeParams, URL){
+		
+		//Scope init
+		$scope.uiState = "loading";
+		$scope.model = {};
+		$scope.usuario = autentication.getLoginLocal()[1];
+
+		//Scope methods
+		$scope.cambioTarea = function(tarea, usuario){
+			console.log(tarea, usuario);
+			if(tarea.estado == "NoAsignada"){
+				tarea.estado = "Empezada";
+				tarea.propietario = usuario;
+			}else if(tarea.estado == "Empezada"){
+				tarea.estado = "Finalizada";
+			}
+
+			console.log(tarea);
+			APIClient.modificarTarea(tarea).then(
+
+				//primero siempre el succes
+				function(data){
+					//$scope.model = data.rows;
+					//console.log(data.rows);
+					if($scope.model.length == 0){
+						$scope.uiState = "blank";
+					}else{
+						$scope.uiState = "ideal";
+					}
+					
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
+		};
+		
+		$scope.volver = function(){
+			$location.url(paths.proyectosUser);
+		}
+
+		$scope.modificarProyecto = function(id){
+			var urlBien = URL.resolve(paths.modificarProyecto, {id: id});
+			$location.url(urlBien);
+		}
+
+		// Controller start
+		APIClient.getProyectoId($routeParams.id).then(
+
+			//primero siempre el succes
+			function(data){
+				$scope.model = data.rows[0];
+				console.log($scope.model);
+				if($scope.model.length == 0){
+					$scope.uiState = "blank";
+				}else{
+					$scope.uiState = "ideal";
+				}
+				
+			},
+
+			//segundo si ha habido error
+			function(data){
+				$log.error("Error", data);
+				$scope.uiState = "error";
+			}
+		);
+		
+
+	}]
+);
 ;angular.module("toDoBabel").controller("ErroresLoginController",
     ["$scope","$location","paths", "autentication", function($scope,$location,paths, autentication){
 
@@ -36262,7 +36342,6 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
         // Scope methods
         $scope.login = function(){
 
-            console.log("Me pinchan en login");
             //Contruyo objeto que paso a la API
             var datos_login = {};
             datos_login.nombre = $scope.model.name;
@@ -36343,6 +36422,62 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		
 	}]
 );
+;angular.module("toDoBabel").controller("ModificarProyectoController",
+	["$scope", "$location", "autentication", "paths", "APIClient", "$routeParams", "URL",
+	 function($scope, $location, autentication, paths, APIClient, $routeParams, URL){
+		
+		//Scope init
+		$scope.uiState = "loading";
+		$scope.model = {};
+		$scope.usuario = autentication.getLoginLocal()[1];
+
+		//Scope methods
+		$scope.volver = function(){
+			var urlBien = URL.resolve(paths.detalleProyecto, {id: $scope.model._id});
+			$location.url(urlBien);
+		}
+
+		$scope.modificarProyecto = function(){
+
+			//compruebo si han tocado los miembros
+			if(typeof($scope.model.miembros) == "string"){
+				var string = $scope.model.miembros;
+				var array = string.split(",");
+				$scope.model.miembros = array;
+			}
+			
+			for(var i = 0; i<$scope.model.tareas.length; i++){
+				$scope.model.tareas[i].proyecto = $scope.model.nombre;
+			}
+			console.log($scope.model);
+
+			//hacer put en la base de datos
+		}
+
+		// Controller start
+		APIClient.getProyectoId($routeParams.id).then(
+
+			//primero siempre el succes
+			function(data){
+				$scope.model = data.rows[0];
+				//console.log($scope.model);
+				if($scope.model.length == 0){
+					$scope.uiState = "blank";
+				}else{
+					$scope.uiState = "ideal";
+				}
+				
+			},
+
+			//segundo si ha habido error
+			function(data){
+				$log.error("Error", data);
+				$scope.uiState = "error";
+			}
+		);
+
+	}]
+);
 ;angular.module("toDoBabel").controller("ProyectosController",
 	["$scope", "$location", "autentication", "paths", "APIClient", function($scope, $location, autentication, paths, APIClient){
 		
@@ -36356,7 +36491,6 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		APIClient.getProyectos().then(
 			//primero siempre el succes
 			function(data){
-				console.log(data);
 				$scope.model = data.rows;
 
 				if($scope.model.length == 0){
@@ -36378,30 +36512,25 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 	}]
 );
 ;angular.module("toDoBabel").controller("ProyectosUsuarioController",
-	["$scope", "$location", "autentication", "paths", "APIClient", "$sce","$routeParams",
-	 function($scope, $location, autentication, paths, APIClient, $sce, $routeParams){
+	["$scope", "$location", "autentication", "paths", "APIClient", "$sce","$routeParams", "URL",
+	 function($scope, $location, autentication, paths, APIClient, $sce, $routeParams, URL){
 		
 		//Scope init
 		$scope.uiState = "loading";
 		$scope.model = [];
 		$scope.usuario = autentication.getLoginLocal()[1];
 
+		// Scope métodos
+		$scope.getMovieDetailURL = function(proyecto){
+            return URL.resolve(paths.detalleProyecto, {id: proyecto._id});
+        };
 
-		// Scope methods
-		$scope.proyectoDetalle = function(){
-			console.log("PINCHAN DETALLE");
-			//$location.url(paths.notFound);
-			//Hacer luego el detalle
-
-
-		};
 		
 		// Controller start
 		APIClient.getProyectosUsuario($scope.usuario).then(
 
 			//primero siempre el succes
 			function(data){
-				console.log(data);
 				$scope.model = data.rows;
 
 				if($scope.model.length == 0){
@@ -36482,13 +36611,47 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$scope.uiState = "loading";
 		$scope.model = [];
 		$scope.usuario = autentication.getLoginLocal()[1];
+
+		//Scope methods
+		$scope.cambioTarea = function(tarea, usuario){
+			console.log(tarea, usuario);
+			if(tarea.estado == "NoAsignada"){
+				tarea.estado = "Empezada";
+				tarea.propietario = usuario;
+			}else if(tarea.estado == "Empezada"){
+				tarea.estado = "Finalizada";
+			}
+
+			console.log(tarea);
+			APIClient.modificarTarea(tarea).then(
+
+				//primero siempre el succes
+				function(data){
+					//$scope.model = data.rows;
+					//console.log(data.rows);
+					if($scope.model.length == 0){
+						$scope.uiState = "blank";
+					}else{
+						$scope.uiState = "ideal";
+					}
+					
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
+
+
+		};
 		
 		// Controller start
 		APIClient.getTareasUsuario($scope.usuario).then(
 
 			//primero siempre el succes
 			function(data){
-				console.log(data);
 				$scope.model = data.rows;
 
 				if($scope.model.length == 0){
@@ -36515,7 +36678,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		scope: {
 			model:"=items",
 			modo:"@",
-			proyectoDetalle: "&",
+			getDetailUrl : "&",
 			usuario:"="
 		},
 		templateUrl:"views/proyectosItems.html"
@@ -36526,7 +36689,8 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		restrict:"AE",
 		scope: {
 			model:"=items",
-			usuario:"="
+			usuario:"=",
+			cambioTarea:"&"
 		},
 		templateUrl:"views/tareasItems.html"
 	};
@@ -36592,6 +36756,44 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
             var deferred = $q.defer();
             //Hacer trabajo asíncrono
             var urlBien  = URL.resolve(api_paths.tareasUsuario, {id: id});
+            $http.get(urlBien).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+
+        this.modificarTarea = function(tarea){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            //var urlBien  = URL.resolve(api_paths.tareasUsuario, {id: id});
+            $http.put(api_paths.modificarTarea, tarea).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+
+        this.getProyectoId = function(id){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            var urlBien  = URL.resolve(api_paths.detalleProyecto, {id: id});
             $http.get(urlBien).then(
                 function(response){
                         //resolver la promesa
@@ -36703,8 +36905,10 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 	login: "/api/login",
 	registro: "/api/registro",
 	proyectos: "/api/proyectos",
-	proyectosUsuario: "/api/proyectos/:id",
-	tareasUsuario: "api/tareas/:id"
+	proyectosUsuario: "/api/proyectos/usuario/:id",
+	tareasUsuario: "api/tareas/:id",
+	modificarTarea: "api/tareas",
+	detalleProyecto: "/api/proyectos/:id"
 });
 ;angular.module("toDoBabel").constant("paths",{
 	home: "/",
@@ -36713,5 +36917,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 	registro: "/registro",
 	erroresLogin: "/erroresLogin",
 	proyectosUser: "/proyectos-usuario",
-	tareasUser: "/tareas-usuario"
+	tareasUser: "/tareas-usuario",
+	detalleProyecto: "/proyecto/:id",
+	modificarProyecto: "/modificarProyecto/:id"
 });

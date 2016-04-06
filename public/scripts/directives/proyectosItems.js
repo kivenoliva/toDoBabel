@@ -4,7 +4,7 @@ angular.module("toDoBabel").directive("proyectosItems", function(){
 		scope: {
 			model:"=items",
 			modo:"@",
-			proyectoDetalle: "&",
+			getDetailUrl : "&",
 			usuario:"="
 		},
 		templateUrl:"views/proyectosItems.html"

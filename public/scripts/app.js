@@ -5,6 +5,8 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$routeProvider
 			.when(paths.home, {
 				redirectTo: paths.proyectos
+			}).when(paths.detalleProyecto, {
+				templateUrl: 'views/DetalleProyecto.html'
 			}).when(paths.proyectos, {
 				templateUrl: 'views/Proyectos.html'
 			}).when(paths.login, {
@@ -17,6 +19,8 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				templateUrl: 'views/ProyectosUsuario.html'
 			}).when(paths.tareasUser, {
 				templateUrl: 'views/TareasUsuario.html'
+			}).when(paths.modificarProyecto, {
+				templateUrl: 'views/ModificarProyecto.html'
 			}).otherwise({
 				templateUrl: 'views/404.html'
 			})

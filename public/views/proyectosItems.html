@@ -1,23 +1,28 @@
 <div>
 	
-	<h1 ng-hide="modo == 'proyectos_user'">Listado de los proyectos de la empresa: </h1>
-	<h1 ng-show="modo == 'proyectos_user'">Listado de los proyectos de {{usuario}}: </h1>
+	<h1 class="text-primary" ng-hide="modo == 'proyectos_user'">Listado de los proyectos de la empresa: </h1>
+	<h1 class="text-primary" ng-show="modo == 'proyectos_user'">Listado de los proyectos de {{usuario}}: </h1>
 	<br>
-    	<br>
+	<br>
    	<br>
 
 	<ul class="media-list" ng-repeat="item in model">
 	  <li class="media lista-proyectos">
-	    <div class="media-left">
-	      <a href="">
-	      	<img ng-src="http://www.babel.es/sites/default/files/imageblock/logo.png" width="100">	        
-	      </a>
+	    <div class="media-left hidden-xs">
+	      <img ng-src="http://www.babel.es/sites/default/files/imageblock/logo.png" width="100px"
+    		height="120px" class="media-object">	        
 	    </div>
 	    <div class="media-body">
-	      <h4 class="media-heading">Nombre del proyecto: <strong>{{ item.nombre }}</strong></h4>
-	      <p><strong>Fecha de creación:</strong> {{::item.fecha }}</p>
-	      <p><strong>Miembros:</strong> {{ item.miembros | join }}</p>
-	      <button class="btn btn-primary" ng-click="proyectoDetalle({stuff:item})" ng-show="modo == 'proyectos_user'">Ver proyecto en detalle</button>
+			<h4 class="media-heading">Nombre del proyecto: <strong>{{ item.nombre }}</strong></h4>
+			<br>
+			<p><strong>Fecha de creación:</strong> {{::item.fecha }}</p>
+
+			<p><strong>Miembros:</strong> {{ item.miembros | join }}</p>
+
+			<a href="#{{::getDetailUrl({stuff: item})}}" ng-show="modo == 'proyectos_user'" class="btn btn-primary">
+				Ver proyecto en detalle
+			</a>
+
 	    </div>
 	    <br>
 	    <br>
