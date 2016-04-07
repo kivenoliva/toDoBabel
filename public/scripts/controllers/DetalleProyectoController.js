@@ -8,6 +8,7 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 		$scope.usuario = autentication.getLoginLocal()[1];
 
 		//Scope methods
+
 		$scope.cambioTarea = function(tarea, usuario){
 			//console.log(tarea, usuario);
 			if(tarea.estado == "NoAsignada"){
@@ -23,16 +24,16 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-                        $scope.$emit("ErroresLogin", data.err);
-                    }else{
-                        //$scope.model = data.rows;
+						$scope.$emit("ErroresLogin", data.err);
+					}else{
+						//$scope.model = data.rows;
 						//console.log(data.rows);
 						if($scope.model.length == 0){
 							$scope.uiState = "blank";
 						}else{
 							$scope.uiState = "ideal";
 						}
-                    }		
+					}		
 					
 					
 				},
@@ -60,16 +61,21 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 			//primero siempre el succes
 			function(data){
 				if(!data.result){
-                    $scope.$emit("ErroresLogin", data.err);
-                }else{
-                    $scope.model = data.rows[0];
-					//console.log($scope.model);
+					$scope.$emit("ErroresLogin", data.err);
+				}else{
+					$scope.model = data.rows[0];
+					
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
 					}else{
 						$scope.uiState = "ideal";
 					}
-                }	
+					$scope.getDetailURL = function(){
+						console.log(paths.detalleMiembros);
+						console.log($scope.model._id);
+						return URL.resolve(paths.detalleMiembros, {id: $scope.model._id});
+					};
+				}	
 			},
 
 			//segundo si ha habido error

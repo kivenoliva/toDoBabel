@@ -26,11 +26,12 @@
                     <div ng-show="modificarProyectoForm.miembros.$dirty && modificarProyectoForm.miembros.$error.required" class="alert alert-danger alert-dismissible" role="alert">
                       <strong>Algún miembro es obligatorio, recuerda metertete tú como miembro</strong> 
                     </div>
+                    <div ng-show="modificarProyectoForm.miembros.$dirty" role="alert" class="alert alert-warning alert-dismissible">
+                        <strong>Mete los miembros separados por comas sin dejar espacios</strong> 
+                    </div>
                 </div>
             </div>
-            <div role="alert" class="alert alert-warning alert-dismissible">
-                <strong>Mete los miembros separados por comas sin dejar espacios</strong> 
-            </div>
+
 
             <div class="form-group">
                 <label for="fecha" class="col-sm-2 control-label">Fecha de entrega</label>

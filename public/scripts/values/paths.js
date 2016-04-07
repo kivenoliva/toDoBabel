@@ -9,5 +9,6 @@ angular.module("toDoBabel").constant("paths",{
 	detalleProyecto: "/proyecto/:id",
 	modificarProyecto: "/modificarProyecto/:id",
 	nuevoProyecto: "/nuevoProyecto",
-	gente: "/gente"
+	gente: "/gente",
+	detalleMiembros:"/detalle-miembros/:id"
 });

@@ -5,6 +5,8 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$routeProvider
 			.when(paths.home, {
 				redirectTo: paths.proyectos
+			}).when(paths.detalleMiembros, {
+				templateUrl: 'views/DetalleMiembros.html'
 			}).when(paths.detalleProyecto, {
 				templateUrl: 'views/DetalleProyecto.html'
 			}).when(paths.proyectos, {

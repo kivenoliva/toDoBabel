@@ -1,12 +1,12 @@
 <div ng-controller="NuevoProyectoController">
 
-	<div ng-include="'views/progressBar.html'" ng-show="uiState == 'loading'"></div>
+    <div ng-include="'views/progressBar.html'" ng-show="uiState == 'loading'"></div>
 
-	<div class="jumbotron" ng-show="uiState == 'blank'">
-		<p class="lead">No existen datos.</p>
-	</div>   
-	<h1>Nuevo Proyecto</h1>
-	<form name="nuevoProyectoForm" novalidate class="form-horizontal">
+    <div class="jumbotron" ng-show="uiState == 'blank'">
+        <p class="lead">No existen datos.</p>
+    </div>   
+    <h1>Nuevo Proyecto</h1>
+    <form name="nuevoProyectoForm" novalidate class="form-horizontal">
         <div class="col-sm-10">
             <div class="form-group">
                 <label for="nombre" class="col-sm-2 control-label">Nombre</label>
@@ -26,8 +26,8 @@
                       <strong>Algún miembro es obligatorio, recuerda metertete tú como miembro si así lo deseas.</strong>
                     </div>
                     <div ng-show="nuevoProyectoForm.miembros.$dirty" role="alert" class="alert alert-warning alert-dismissible">
-						<strong>Mete los miembros separados por comas sin dejar espacios</strong> 
-		            </div>
+                        <strong>Mete los miembros separados por comas sin dejar espacios</strong> 
+                    </div>
                 </div>
             </div>
 
@@ -45,54 +45,54 @@
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Tareas</label>
-    			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-			  		Añadir
-				</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    Añadir
+                </button>
 
-			</div>
+            </div>
 
-			<div class="container">
-				<div class="row">
-					<div>
-						<ul ng-repeat="item in tareasSumadas">
-							<div class="col-md-2">
-						
-							</div>
-							<li>
-								{{item}}
-							</li>
-						</ul>
-					</div>
+            <div class="container">
+                <div class="row">
+                    <div>
+                        <ul ng-repeat="item in tareasSumadas">
+                            <div class="col-md-2">
+                        
+                            </div>
+                            <li>
+                                {{item}}
+                            </li>
+                        </ul>
+                    </div>
 
 
-				</div>
+                </div>
 
-				
-			</div>
+                
+            </div>
 
-			
+            
 
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">Descripción de la tarea</h4>
-			      </div>
-			      <div class="modal-body">
-			        <input type="text" name="tareas" class="form-control" ng-model="model.tareas">
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-			        <button type="button" class="btn btn-primary" data-dismiss="modal" type="submit" ng-click="sumarTarea()">Añadir tarea</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Descripción de la tarea</h4>
+                  </div>
+                  <div class="modal-body">
+                    <input type="text" name="tareas" class="form-control" ng-model="model.tareas">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" type="submit" ng-click="sumarTarea()">Añadir tarea</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div>
-            	<button class="btn btn-primary pull-right" type="button" ng-disabled="nuevoProyectoForm.$invalid" ng-click="sumarProyecto()">Añadir Proyecto</button>
+                <button class="btn btn-primary pull-right" type="button" ng-disabled="nuevoProyectoForm.$invalid" ng-click="sumarProyecto()">Añadir Proyecto</button>
                 <button class="btn btn-primary pull-right boton-registro" type="button" ng-click="volver()">Volver</button>
 
             </div>
