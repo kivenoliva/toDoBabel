@@ -22,14 +22,18 @@ angular.module("toDoBabel").controller("TareasUsuarioController",
 
 				//primero siempre el succes
 				function(data){
-					//$scope.model = data.rows;
-					//console.log(data.rows);
-					if($scope.model.length == 0){
-						$scope.uiState = "blank";
-					}else{
-						$scope.uiState = "ideal";
-					}
-					
+					if(!data.result){
+                    	console.log("ERRORRRRRR");
+                        $scope.$emit("ErroresLogin", data.rows);
+                    }else{
+                        //$scope.model = data.rows;
+						//console.log(data.rows);
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+                    }
 				},
 
 				//segundo si ha habido error

@@ -9,7 +9,7 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 
 		//Scope methods
 		$scope.cambioTarea = function(tarea, usuario){
-			console.log(tarea, usuario);
+			//console.log(tarea, usuario);
 			if(tarea.estado == "NoAsignada"){
 				tarea.estado = "Empezada";
 				tarea.propietario = usuario;
@@ -17,18 +17,23 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 				tarea.estado = "Finalizada";
 			}
 
-			console.log(tarea);
+			//console.log(tarea);
 			APIClient.modificarTarea(tarea).then(
 
 				//primero siempre el succes
 				function(data){
-					//$scope.model = data.rows;
-					//console.log(data.rows);
-					if($scope.model.length == 0){
-						$scope.uiState = "blank";
-					}else{
-						$scope.uiState = "ideal";
-					}
+					if(!data.result){
+                        $scope.$emit("ErroresLogin", data.err);
+                    }else{
+                        //$scope.model = data.rows;
+						//console.log(data.rows);
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+                    }		
+					
 					
 				},
 
@@ -54,14 +59,17 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 
 			//primero siempre el succes
 			function(data){
-				$scope.model = data.rows[0];
-				console.log($scope.model);
-				if($scope.model.length == 0){
-					$scope.uiState = "blank";
-				}else{
-					$scope.uiState = "ideal";
-				}
-				
+				if(!data.result){
+                    $scope.$emit("ErroresLogin", data.err);
+                }else{
+                    $scope.model = data.rows[0];
+					//console.log($scope.model);
+					if($scope.model.length == 0){
+						$scope.uiState = "blank";
+					}else{
+						$scope.uiState = "ideal";
+					}
+                }	
 			},
 
 			//segundo si ha habido error

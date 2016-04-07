@@ -3,7 +3,7 @@
 		{
 			"nombre": "Proyecto de wallapop",
 			"miembros": ["kevin", "Guillermo", "Jesús"],
-			"fecha": "2016-04-03",
+			"fecha": "2016-04-12",
 			"tareas":[{
 					"tarea": "Empezar maquetado",
 					"estado": "Empezada",
@@ -32,7 +32,7 @@
 		{
 			"nombre": "Proyecto de la comunidad",
 			"miembros": [ "Guillermo", "Jesús"],
-			"fecha": "2016-04-03",
+			"fecha": "2016-04-12",
 			"tareas":[{
 					"tarea": "Empezar maquetado",
 					"estado": "NoAsignada",

@@ -7,5 +7,7 @@ angular.module("toDoBabel").constant("paths",{
 	proyectosUser: "/proyectos-usuario",
 	tareasUser: "/tareas-usuario",
 	detalleProyecto: "/proyecto/:id",
-	modificarProyecto: "/modificarProyecto/:id"
+	modificarProyecto: "/modificarProyecto/:id",
+	nuevoProyecto: "/nuevoProyecto",
+	gente: "/gente"
 });

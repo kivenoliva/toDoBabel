@@ -1,3 +1,5 @@
+<div class="table-responsive">
+    
 
 <table class="table table-striped">
     <thead>
@@ -26,9 +28,12 @@
                 <h4><span class="label label-primary" ng-if="item.estado == 'Empezada'">{{item.estado}}</span></h4>
             </td>
             <td>
-	           <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
+               <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})">He terminado</button>
             </td>
         </tr>
     </tbody>
 </table>
+
+    
+</div>

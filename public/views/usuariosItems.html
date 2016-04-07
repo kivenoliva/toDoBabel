@@ -1,0 +1,24 @@
+<div>
+	
+    <div class="container">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4 envuelveUser" ng-repeat="item in model">
+                <div class="user">
+                    <div class="contenidoUser">
+                        <img ng-src="{{::item.url_imagen}}" class="img-circle foto" width="200px" height="200px">   
+                        <br>
+                        <br>
+                        <h4><strong>Nombre: </strong>{{::item.nombre}}</h4>
+                        <h4><strong>Email: </strong>{{::item.email}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+
+</div>

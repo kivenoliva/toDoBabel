@@ -95,6 +95,62 @@ angular.module("toDoBabel").service("APIClient",
             //devolver la promesa
             return deferred.promise; 
         };
+
+        this.modificarProyecto = function(proyecto){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            //var urlBien  = URL.resolve(api_paths.tareasUsuario, {id: id});
+            $http.put(api_paths.proyectos, proyecto).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+
+        this.postProyecto = function(proyecto){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            //var urlBien  = URL.resolve(api_paths.tareasUsuario, {id: id});
+            $http.post(api_paths.proyectos, proyecto).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+
+        this.getGente = function(){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            $http.get(api_paths.gente).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
     
     }]
 );

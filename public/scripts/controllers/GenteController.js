@@ -1,30 +1,28 @@
-angular.module("toDoBabel").controller("ProyectosController",
-	["$scope", "$location", "autentication", "paths", "APIClient", function($scope, $location, autentication, paths, APIClient){
+angular.module("toDoBabel").controller("GenteController",
+	["$scope", "$location", "autentication", "paths", "APIClient", "$routeParams", "URL",
+	 function($scope, $location, autentication, paths, APIClient, $routeParams, URL){
 		
 		//Scope init
 		$scope.uiState = "loading";
 		$scope.model = [];
-		$scope.usuario = autentication.getLogin()[1];
+		$scope.usuario = autentication.getLoginLocal()[1];
+		
+		APIClient.getGente().then(
 
-
-		// Controller start
-		APIClient.getProyectos().then(
 			//primero siempre el succes
 			function(data){
-
 
 				if(!data.result){
                     $scope.$emit("ErroresLogin", data.err);
                 }else{
                     $scope.model = data.rows;
-
+					console.log("despues", $scope.model)
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
 					}else{
 						$scope.uiState = "ideal";
 					}
-                }	
-				
+                }					
 			},
 
 			//segundo si ha habido error
@@ -33,7 +31,7 @@ angular.module("toDoBabel").controller("ProyectosController",
 				$scope.uiState = "error";
 			}
 		);
-
+		
 
 	}]
 );

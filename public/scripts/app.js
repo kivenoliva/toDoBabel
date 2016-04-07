@@ -21,6 +21,10 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				templateUrl: 'views/TareasUsuario.html'
 			}).when(paths.modificarProyecto, {
 				templateUrl: 'views/ModificarProyecto.html'
+			}).when(paths.nuevoProyecto, {
+				templateUrl: 'views/NuevoProyecto.html'
+			}).when(paths.gente, {
+				templateUrl: 'views/Gente.html'
 			}).otherwise({
 				templateUrl: 'views/404.html'
 			})

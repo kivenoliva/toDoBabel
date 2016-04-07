@@ -5,5 +5,6 @@ angular.module("toDoBabel").value("api_paths", {
 	proyectosUsuario: "/api/proyectos/usuario/:id",
 	tareasUsuario: "api/tareas/:id",
 	modificarTarea: "api/tareas",
-	detalleProyecto: "/api/proyectos/:id"
+	detalleProyecto: "/api/proyectos/:id",
+	gente:"/api/users"
 });

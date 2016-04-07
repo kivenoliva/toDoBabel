@@ -18,13 +18,20 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 
 			//primero siempre el succes
 			function(data){
-				$scope.model = data.rows;
 
-				if($scope.model.length == 0){
-					$scope.uiState = "blank";
-				}else{
-					$scope.uiState = "ideal";
-				}
+				if(!data.result){
+                    $scope.$emit("ErroresLogin", data.err);
+                }else{
+                    $scope.model = data.rows;
+
+					if($scope.model.length == 0){
+						$scope.uiState = "blank";
+					}else{
+						$scope.uiState = "ideal";
+					}
+                }	
+				
+				
 				
 			},
 

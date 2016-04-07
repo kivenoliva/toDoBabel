@@ -6728,14 +6728,25 @@ button.close {
   margin-right: 15px;
 }
 .logout {
+  margin-right: 20px;
   margin-top: 8px;
 }
 .menu {
-  background-color: white;
+  background-color: silver;
 }
 .boton-tarea {
   margin-top: 3px;
 }
 .no-menu {
   padding-top: 50px;
+}
+.user {
+  text-align: center;
+  border-radius: 10%;
+  background-color: silver;
+}
+.contenidoUser {
+  padding-bottom: 10%;
+  padding-top: 10%;
+  margin-bottom: 10%;
 }
