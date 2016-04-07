@@ -1,3 +1,10 @@
 <div ng-controller="DetalleMiembrosController">
-	<h1>Detalle miembros</h1>
+	<div ng-include="'views/progressBar.html'" ng-show="uiState == 'loading'"></div>
+
+	<div class="jumbotron" ng-show="uiState == 'blank'">
+		<p class="lead">No existen datos.</p>
+	</div>  
+	<h1>Miembros del proyecto:</h1>
+	<usuarios-items items="model"></usuarios-items>
+	<button class="btn btn-primary pull-right" ng-click="volver()">Volver</button>
 </div>

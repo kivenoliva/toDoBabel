@@ -23,11 +23,31 @@
 	<div class="container">
 		<h1 class="text-primary">Tareas del proyecto: </h1>
 		<tareas-items items="model.tareas" cambio-tarea="cambioTarea(stuff, user)" ng-show="uiState =='ideal'"  usuario="usuario"></tareas-items> 
-		<button class="btn btn-warning btn-detalle" ng-click="">Añadir una nueva tarea</button>
+		<button type="button" class="btn btn-warning btn-detalle" data-toggle="modal" data-target="#myModal">Añadir una nueva tarea</button>
 		<br>
 		<br>
 		<br>
 	</div>
+
+	<!-- Modal -->
+	    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	      <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <h4 class="modal-title" id="myModalLabel">Descripción de la tarea</h4>
+	          </div>
+	          <div class="modal-body">
+	            <input type="text" name="tareas" class="form-control" ng-model="tareasNuevas">
+	          </div>
+	          <div class="modal-footer">
+	            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	            <button type="button" class="btn btn-primary" data-dismiss="modal" type="submit" ng-click="nuevaTarea()">Añadir tarea</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+
 	
 	<br>
 	<div class="container">

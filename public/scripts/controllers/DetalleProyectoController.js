@@ -6,9 +6,9 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 		$scope.uiState = "loading";
 		$scope.model = {};
 		$scope.usuario = autentication.getLoginLocal()[1];
+		$scope.tareasNuevas = "";
 
 		//Scope methods
-
 		$scope.cambioTarea = function(tarea, usuario){
 			//console.log(tarea, usuario);
 			if(tarea.estado == "NoAsignada"){
@@ -53,6 +53,37 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 		$scope.modificarProyecto = function(id){
 			var urlBien = URL.resolve(paths.modificarProyecto, {id: id});
 			$location.url(urlBien);
+		}
+
+		$scope.nuevaTarea = function(){
+			var objTarea = {};
+			objTarea.proyecto = $scope.model.nombre;
+			objTarea.propietario = "";
+			objTarea.estado = "NoAsignada";
+			objTarea.tarea = $scope.tareasNuevas;
+			APIClient.postTarea(objTarea).then(
+
+				//primero siempre el succes
+				function(data){
+					if(!data.result){
+						$scope.$emit("ErroresLogin", data.err);
+					}else{
+		
+						$scope.model = data.rows
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+					}	
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
 		}
 
 		// Controller start

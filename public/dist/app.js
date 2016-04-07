@@ -38606,9 +38606,43 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		
 		//Scope init
 		$scope.uiState = "loading";
-		$scope.model = {};
+		$scope.model = [];
 		$scope.usuario = autentication.getLoginLocal()[1];
-		console.log("MIEMBROS CONTROLLER");
+		
+		console.log($scope.model);
+		//Scope methods
+		//Scope methods
+		$scope.volver = function(){
+			var urlBien = URL.resolve(paths.detalleProyecto, {id: $routeParams.id});
+			$location.url(urlBien);
+		}
+
+
+		//Scope start
+		APIClient.getMiembrosProyecto($routeParams.id).then(
+
+			//primero siempre el succes
+			function(data){
+
+				if(!data.result){
+				    $scope.$emit("ErroresLogin", data.err);
+				}else{
+				    	$scope.model = data.rows;
+					
+					if($scope.model.length == 0){
+						$scope.uiState = "blank";
+					}else{
+						$scope.uiState = "ideal";
+					}
+				}					
+			},
+
+			//segundo si ha habido error
+			function(data){
+				$log.error("Error", data);
+				$scope.uiState = "error";
+			}
+		);
 
 	}]
 );
@@ -38620,9 +38654,9 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$scope.uiState = "loading";
 		$scope.model = {};
 		$scope.usuario = autentication.getLoginLocal()[1];
+		$scope.tareasNuevas = "";
 
 		//Scope methods
-
 		$scope.cambioTarea = function(tarea, usuario){
 			//console.log(tarea, usuario);
 			if(tarea.estado == "NoAsignada"){
@@ -38667,6 +38701,37 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$scope.modificarProyecto = function(id){
 			var urlBien = URL.resolve(paths.modificarProyecto, {id: id});
 			$location.url(urlBien);
+		}
+
+		$scope.nuevaTarea = function(){
+			var objTarea = {};
+			objTarea.proyecto = $scope.model.nombre;
+			objTarea.propietario = "";
+			objTarea.estado = "NoAsignada";
+			objTarea.tarea = $scope.tareasNuevas;
+			APIClient.postTarea(objTarea).then(
+
+				//primero siempre el succes
+				function(data){
+					if(!data.result){
+						$scope.$emit("ErroresLogin", data.err);
+					}else{
+		
+						$scope.model = data.rows
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+					}	
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
 		}
 
 		// Controller start
@@ -39444,6 +39509,45 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
             //devolver la promesa
             return deferred.promise; 
         };
+
+        this.getMiembrosProyecto = function(id){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            var urlBien  = URL.resolve(api_paths.miembrosProyecto, {id: id});
+            $http.get(urlBien).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+
+        };
+
+        this.postTarea = function(tarea){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            //var urlBien  = URL.resolve(api_paths.tareasUsuario, {id: id});
+            $http.post(api_paths.nuevaTarea, tarea).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
     
     }]
 );
@@ -39546,7 +39650,9 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 	tareasUsuario: "api/tareas/:id",
 	modificarTarea: "api/tareas",
 	detalleProyecto: "/api/proyectos/:id",
-	gente:"/api/users"
+	gente:"/api/users",
+	miembrosProyecto:"/api/users/proyecto/:id",
+	nuevaTarea:"/api/tareas"
 });
 ;angular.module("toDoBabel").constant("paths",{
 	home: "/",

@@ -67,11 +67,16 @@ router.get('/proyecto/:id', function(req, res, next) {
             res.json({result: false, err: "Error al obtener un proyecto de la base de datos."});
             return;
         }
+        if(rows.length == 0){
+        	  res.json({result: false, err: "El id que me has pasado está mal"});
+            return;
 
+        }
 	getUsers(rows[0].miembros).then( function() {
 		console.log("FIN");
-		console.log(arrayMiembros)
-		res.json({result: true, rows: arrayMiembros});
+		var respuesta = arrayMiembros;
+		arrayMiembros = [];
+		res.json({result: true, rows: respuesta});
         		return;
 	}).catch( function(error) {
 		console.log("ERROR EN PROMESAS");
