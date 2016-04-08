@@ -8,7 +8,14 @@ angular.module("toDoBabel").controller("AppController",
 		controller.titles[paths.proyectos] = "Proyectos de la empresa";
 		controller.titles[paths.login] = "Login";
 		controller.titles[paths.registro] = "Registro";
-
+		controller.titles[paths.erroresLogin] = "Errores info";
+		controller.titles[paths.proyectosUser] = "Proyectos Usuario";
+		controller.titles[paths.tareasUser] = "Tareas Usuario";
+		controller.titles[paths.detalleProyecto] = "Proyecto";
+		controller.titles[paths.modificarProyecto] = "Modificar Proyecto";
+		controller.titles[paths.nuevoProyecto] = "Crea nuevo Proyecto";
+		controller.titles[paths.gente] = "Gente";
+		controller.titles[paths.detalleMiembros] = "Miembros Proyecto";
 
 
 		//Model init
@@ -71,6 +78,10 @@ angular.module("toDoBabel").controller("AppController",
 					console.log("Estas logueado con usuario : ",autentication.getLoginLocal()[1] );
 				}		
 			}			
+		});
+
+		$scope.$on("ChangeTitle", function(event,title){
+			$scope.model.title = title;
 		});
 		
 	}]

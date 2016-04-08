@@ -38533,7 +38533,14 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		controller.titles[paths.proyectos] = "Proyectos de la empresa";
 		controller.titles[paths.login] = "Login";
 		controller.titles[paths.registro] = "Registro";
-
+		controller.titles[paths.erroresLogin] = "Errores info";
+		controller.titles[paths.proyectosUser] = "Proyectos Usuario";
+		controller.titles[paths.tareasUser] = "Tareas Usuario";
+		controller.titles[paths.detalleProyecto] = "Proyecto";
+		controller.titles[paths.modificarProyecto] = "Modificar Proyecto";
+		controller.titles[paths.nuevoProyecto] = "Crea nuevo Proyecto";
+		controller.titles[paths.gente] = "Gente";
+		controller.titles[paths.detalleMiembros] = "Miembros Proyecto";
 
 
 		//Model init
@@ -38597,6 +38604,10 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				}		
 			}			
 		});
+
+		$scope.$on("ChangeTitle", function(event,title){
+			$scope.model.title = title;
+		});
 		
 	}]
 );
@@ -38608,9 +38619,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$scope.uiState = "loading";
 		$scope.model = [];
 		$scope.usuario = autentication.getLoginLocal()[1];
-		
-		//console.log($scope.model);
-		//Scope methods
+
 		//Scope methods
 		$scope.volver = function(){
 			var urlBien = URL.resolve(paths.detalleProyecto, {id: $routeParams.id});
@@ -38619,15 +38628,17 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 
 
 		//Scope start
+		$scope.$emit("ChangeTitle", "Cargando");
 		APIClient.getMiembrosProyecto($routeParams.id).then(
 
 			//primero siempre el succes
 			function(data){
 
 				if(!data.result){
-				    $scope.$emit("ErroresLogin", data.err);
+				    alert(data.err);
 				}else{
-				    	$scope.model = data.rows;
+			    	$scope.model = data.rows;
+			    	$scope.$emit("ChangeTitle", "Miembros Proyecto");
 					
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
@@ -38672,7 +38683,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-						$scope.$emit("ErroresLogin", data.err);
+						alert(data.err);
 					}else{
 						//$scope.model = data.rows;
 						//console.log(data.rows);
@@ -38712,7 +38723,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-						$scope.$emit("ErroresLogin", data.err);
+						alert(data.err);
 					}else{
 						//$scope.model = data.rows;
 						console.log(data.rows);
@@ -38748,14 +38759,12 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-						$scope.$emit("ErroresLogin", data.err);
+						alert(data.err);
 					}else{
 						//$scope.model = data.rows;
 						console.log(data.rows);
 						$location.url(paths.proyectosUser);
-					}		
-					
-					
+					}							
 				},
 
 				//segundo si ha habido error
@@ -38778,7 +38787,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-						$scope.$emit("ErroresLogin", data.err);
+						alert(data.err);
 					}else{
 		
 						$scope.model = data.rows
@@ -38799,14 +38808,16 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		}
 
 		// Controller start
+		$scope.$emit("ChangeTitle", "Cargando");
 		APIClient.getProyectoId($routeParams.id).then(
 
 			//primero siempre el succes
 			function(data){
 				if(!data.result){
-					$scope.$emit("ErroresLogin", data.err);
+					alert(data.err);
 				}else{
 					$scope.model = data.rows[0];
+					$scope.$emit("ChangeTitle", $scope.model.nombre);
 					
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
@@ -38866,7 +38877,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 			function(data){
 
 				if(!data.result){
-                    $scope.$emit("ErroresLogin", data.err);
+                    alert(data.err);
                 }else{
                     $scope.model = data.rows;
 					console.log("despues", $scope.model)
@@ -38908,10 +38919,11 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 
             //Scope start
             autentication.getLogin(datos_login).then(
-                //postMessage(Message, transferList)cula encontrada
+                //success
                 function(data){
                     if(!data.result){
                         $scope.$emit("ErroresLogin", data.err);
+                        
                     }else{
                         //Como estoy logueado, me lo guardo en local para mi navegador
                         $scope.user = data.rows;
@@ -38921,17 +38933,11 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
                     }
                     
                 }, 
-                //Pelicula no encontrada
+                //datos encontrada
                 function(error){
                     $location.url(paths.notFound);
                 }
             );
-            /*
-            autentication.setLogin($scope.model.name,true);
-            console.log("Acabo de loguearme con el usuario : ", $scope.model.name);
-            pubSub.publish();
-            $location.url(paths.listado);           
-            */
         };
 
         $scope.registroLogin = function(){
@@ -38946,7 +38952,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 
 		//Scope init
 		$scope.model = {
-			selectedItem: paths.proyectos
+			selectedItem: $location.path()
 		};
 		$scope.paths = paths;
 		$scope.view = "";
@@ -39009,27 +39015,12 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				$scope.model.tareas[i].proyecto = $scope.model.nombre;
 			}
 
-			/*
-			//hacer put en la base de datos
-			//hago chanchullo con la fecha para mandarsela en string bien construido a la base de datos
-			var obj = $scope.model;
-			var fecha = obj.fecha.toString().split(" ");
-			var array = [fecha[0], fecha[1], fecha[2], fecha[3]];
-			var fechaBD = array.join(" ");
-			obj.fecha = fechaBD.toString();
-			*/
-			
+			//hago chanchullo con la fecha para mandarsela en string bien construido a la base de datos			
 			var fecha = $scope.formatoFecha.toString().split(" ");
 			var array = [fecha[0], fecha[1], fecha[2], fecha[3]];
 			var fechaBD = array.join(" ");
 			console.log(array);
 			$scope.model.fecha = fechaBD;
-			/*
-			var fecha = $scope.formatoFecha.toString().split(" ");
-			var array = [fecha[0], fecha[1], fecha[2], fecha[3]];
-			var fechaBD = array.join(" ");
-			*/
-			//console.log($scope.formatoFecha.toString().split(" "));
 
 			APIClient.modificarProyecto($scope.model).then(
 
@@ -39037,7 +39028,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				function(data){
 
 					if(!data.result){
-                        $scope.$emit("ErroresLogin", data.err);
+                        alert(data.err);
                     }else{
                         $scope.model = data.rows;
 						//console.log("despues", $scope.model)
@@ -39062,6 +39053,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		}
 
 		// Controller start
+		$scope.$emit("ChangeTitle", "Cargando");  
 		APIClient.getProyectoId($routeParams.id).then(
 
 			//primero siempre el succes
@@ -39069,18 +39061,12 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				
 
 				if(!data.result){
-                    $scope.$emit("ErroresLogin", data.err);
+                    alert(data.err);
                 }else{
                     $scope.model = data.rows[0];
-              
-					$scope.formatoFecha = new Date($scope.model.fecha);
-					
-					/*
-					//transformo la fecha que me viene en string a date para el formulario.
-					$scope.model.fecha = new Date($scope.model.fecha);
-					console.log($scope.model.fecha)
-					*/
-					//console.log($scope.model);
+                    $scope.$emit("ChangeTitle", "Modificar Proyecto");             
+					$scope.formatoFecha = new Date("$scope.model.fecha");
+
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
 					}else{
@@ -39159,7 +39145,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				function(data){
 
 					if(!data.result){
-                        $scope.$emit("ErroresLogin", data.err);
+                        alert(data.err);
                     }else{
                         $scope.model = data.rows;
 						//console.log("despues", $scope.model)
@@ -39201,7 +39187,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 
 
 				if(!data.result){
-                    $scope.$emit("ErroresLogin", data.err);
+                    alert(data.err);
                 }else{
                     $scope.model = data.rows;
 
@@ -39246,7 +39232,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 			function(data){
 
 				if(!data.result){
-                    $scope.$emit("ErroresLogin", data.err);
+                    alert(data.err);
                 }else{
                     $scope.model = data.rows;
 
@@ -39255,10 +39241,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 					}else{
 						$scope.uiState = "ideal";
 					}
-                }	
-				
-				
-				
+                }		
 			},
 
 			//segundo si ha habido error
@@ -39295,7 +39278,6 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
                 function(data){
                 	console.log(data);
                     if(!data.result){
-                    	console.log("ERRORRRRRR");
                         $scope.$emit("ErroresLogin", data.rows);
                     }else{
                         //Como estoy logueado, me lo guardo en local para mi navegador
@@ -39348,8 +39330,7 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-                    	console.log("ERRORRRRRR");
-                        $scope.$emit("ErroresLogin", data.rows);
+                    	alert(data.err);
                     }else{
                         //$scope.model = data.rows;
 						//console.log(data.rows);
@@ -39376,14 +39357,17 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 
 			//primero siempre el succes
 			function(data){
-				$scope.model = data.rows;
+				if(!data.result){
+                	alert(data.err);
+                }else{
+                    $scope.model = data.rows;
 
-				if($scope.model.length == 0){
-					$scope.uiState = "blank";
-				}else{
-					$scope.uiState = "ideal";
-				}
-				
+					if($scope.model.length == 0){
+						$scope.uiState = "blank";
+					}else{
+						$scope.uiState = "ideal";
+					}
+                }		
 			},
 
 			//segundo si ha habido error

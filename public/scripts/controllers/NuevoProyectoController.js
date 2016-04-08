@@ -59,7 +59,7 @@ angular.module("toDoBabel").controller("NuevoProyectoController",
 				function(data){
 
 					if(!data.result){
-                        $scope.$emit("ErroresLogin", data.err);
+                        alert(data.err);
                     }else{
                         $scope.model = data.rows;
 						//console.log("despues", $scope.model)

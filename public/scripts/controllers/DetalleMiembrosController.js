@@ -6,9 +6,7 @@ angular.module("toDoBabel").controller("DetalleMiembrosController",
 		$scope.uiState = "loading";
 		$scope.model = [];
 		$scope.usuario = autentication.getLoginLocal()[1];
-		
-		//console.log($scope.model);
-		//Scope methods
+
 		//Scope methods
 		$scope.volver = function(){
 			var urlBien = URL.resolve(paths.detalleProyecto, {id: $routeParams.id});
@@ -17,15 +15,17 @@ angular.module("toDoBabel").controller("DetalleMiembrosController",
 
 
 		//Scope start
+		$scope.$emit("ChangeTitle", "Cargando");
 		APIClient.getMiembrosProyecto($routeParams.id).then(
 
 			//primero siempre el succes
 			function(data){
 
 				if(!data.result){
-				    $scope.$emit("ErroresLogin", data.err);
+				    alert(data.err);
 				}else{
-				    	$scope.model = data.rows;
+			    	$scope.model = data.rows;
+			    	$scope.$emit("ChangeTitle", "Miembros Proyecto");
 					
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";

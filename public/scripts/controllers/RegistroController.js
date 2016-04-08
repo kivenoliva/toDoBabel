@@ -22,7 +22,6 @@ angular.module("toDoBabel").controller("RegistroController",
                 function(data){
                 	console.log(data);
                     if(!data.result){
-                    	console.log("ERRORRRRRR");
                         $scope.$emit("ErroresLogin", data.rows);
                     }else{
                         //Como estoy logueado, me lo guardo en local para mi navegador

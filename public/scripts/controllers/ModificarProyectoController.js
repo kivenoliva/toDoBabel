@@ -26,27 +26,12 @@ angular.module("toDoBabel").controller("ModificarProyectoController",
 				$scope.model.tareas[i].proyecto = $scope.model.nombre;
 			}
 
-			/*
-			//hacer put en la base de datos
-			//hago chanchullo con la fecha para mandarsela en string bien construido a la base de datos
-			var obj = $scope.model;
-			var fecha = obj.fecha.toString().split(" ");
-			var array = [fecha[0], fecha[1], fecha[2], fecha[3]];
-			var fechaBD = array.join(" ");
-			obj.fecha = fechaBD.toString();
-			*/
-			
+			//hago chanchullo con la fecha para mandarsela en string bien construido a la base de datos			
 			var fecha = $scope.formatoFecha.toString().split(" ");
 			var array = [fecha[0], fecha[1], fecha[2], fecha[3]];
 			var fechaBD = array.join(" ");
 			console.log(array);
 			$scope.model.fecha = fechaBD;
-			/*
-			var fecha = $scope.formatoFecha.toString().split(" ");
-			var array = [fecha[0], fecha[1], fecha[2], fecha[3]];
-			var fechaBD = array.join(" ");
-			*/
-			//console.log($scope.formatoFecha.toString().split(" "));
 
 			APIClient.modificarProyecto($scope.model).then(
 
@@ -54,7 +39,7 @@ angular.module("toDoBabel").controller("ModificarProyectoController",
 				function(data){
 
 					if(!data.result){
-                        $scope.$emit("ErroresLogin", data.err);
+                        alert(data.err);
                     }else{
                         $scope.model = data.rows;
 						//console.log("despues", $scope.model)
@@ -79,6 +64,7 @@ angular.module("toDoBabel").controller("ModificarProyectoController",
 		}
 
 		// Controller start
+		$scope.$emit("ChangeTitle", "Cargando");  
 		APIClient.getProyectoId($routeParams.id).then(
 
 			//primero siempre el succes
@@ -86,18 +72,12 @@ angular.module("toDoBabel").controller("ModificarProyectoController",
 				
 
 				if(!data.result){
-                    $scope.$emit("ErroresLogin", data.err);
+                    alert(data.err);
                 }else{
                     $scope.model = data.rows[0];
-              
-					$scope.formatoFecha = new Date($scope.model.fecha);
-					
-					/*
-					//transformo la fecha que me viene en string a date para el formulario.
-					$scope.model.fecha = new Date($scope.model.fecha);
-					console.log($scope.model.fecha)
-					*/
-					//console.log($scope.model);
+                    $scope.$emit("ChangeTitle", "Modificar Proyecto");             
+					$scope.formatoFecha = new Date("$scope.model.fecha");
+
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
 					}else{

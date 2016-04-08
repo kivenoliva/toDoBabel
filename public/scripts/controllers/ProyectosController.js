@@ -14,7 +14,7 @@ angular.module("toDoBabel").controller("ProyectosController",
 
 
 				if(!data.result){
-                    $scope.$emit("ErroresLogin", data.err);
+                    alert(data.err);
                 }else{
                     $scope.model = data.rows;
 

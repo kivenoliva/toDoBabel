@@ -24,7 +24,7 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-						$scope.$emit("ErroresLogin", data.err);
+						alert(data.err);
 					}else{
 						//$scope.model = data.rows;
 						//console.log(data.rows);
@@ -64,7 +64,7 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-						$scope.$emit("ErroresLogin", data.err);
+						alert(data.err);
 					}else{
 						//$scope.model = data.rows;
 						console.log(data.rows);
@@ -100,14 +100,12 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-						$scope.$emit("ErroresLogin", data.err);
+						alert(data.err);
 					}else{
 						//$scope.model = data.rows;
 						console.log(data.rows);
 						$location.url(paths.proyectosUser);
-					}		
-					
-					
+					}							
 				},
 
 				//segundo si ha habido error
@@ -130,7 +128,7 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
-						$scope.$emit("ErroresLogin", data.err);
+						alert(data.err);
 					}else{
 		
 						$scope.model = data.rows
@@ -151,14 +149,16 @@ angular.module("toDoBabel").controller("DetalleProyectoController",
 		}
 
 		// Controller start
+		$scope.$emit("ChangeTitle", "Cargando");
 		APIClient.getProyectoId($routeParams.id).then(
 
 			//primero siempre el succes
 			function(data){
 				if(!data.result){
-					$scope.$emit("ErroresLogin", data.err);
+					alert(data.err);
 				}else{
 					$scope.model = data.rows[0];
+					$scope.$emit("ChangeTitle", $scope.model.nombre);
 					
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";

@@ -18,10 +18,11 @@ angular.module("toDoBabel").controller("LoginController",
 
             //Scope start
             autentication.getLogin(datos_login).then(
-                //postMessage(Message, transferList)cula encontrada
+                //success
                 function(data){
                     if(!data.result){
                         $scope.$emit("ErroresLogin", data.err);
+                        
                     }else{
                         //Como estoy logueado, me lo guardo en local para mi navegador
                         $scope.user = data.rows;
@@ -31,17 +32,11 @@ angular.module("toDoBabel").controller("LoginController",
                     }
                     
                 }, 
-                //Pelicula no encontrada
+                //datos encontrada
                 function(error){
                     $location.url(paths.notFound);
                 }
             );
-            /*
-            autentication.setLogin($scope.model.name,true);
-            console.log("Acabo de loguearme con el usuario : ", $scope.model.name);
-            pubSub.publish();
-            $location.url(paths.listado);           
-            */
         };
 
         $scope.registroLogin = function(){

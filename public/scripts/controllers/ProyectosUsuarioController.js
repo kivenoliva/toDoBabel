@@ -20,7 +20,7 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 			function(data){
 
 				if(!data.result){
-                    $scope.$emit("ErroresLogin", data.err);
+                    alert(data.err);
                 }else{
                     $scope.model = data.rows;
 
@@ -29,10 +29,7 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 					}else{
 						$scope.uiState = "ideal";
 					}
-                }	
-				
-				
-				
+                }		
 			},
 
 			//segundo si ha habido error
