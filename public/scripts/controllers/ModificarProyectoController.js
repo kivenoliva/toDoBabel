@@ -6,6 +6,7 @@ angular.module("toDoBabel").controller("ModificarProyectoController",
 		$scope.uiState = "loading";
 		$scope.model = {};
 		$scope.usuario = autentication.getLoginLocal()[1];
+		$scope.formatoFecha = new Date("0000/00/00");
 
 		//Scope methods
 		$scope.volver = function(){
@@ -34,6 +35,18 @@ angular.module("toDoBabel").controller("ModificarProyectoController",
 			var fechaBD = array.join(" ");
 			obj.fecha = fechaBD.toString();
 			*/
+			
+			var fecha = $scope.formatoFecha.toString().split(" ");
+			var array = [fecha[0], fecha[1], fecha[2], fecha[3]];
+			var fechaBD = array.join(" ");
+			console.log(array);
+			$scope.model.fecha = fechaBD;
+			/*
+			var fecha = $scope.formatoFecha.toString().split(" ");
+			var array = [fecha[0], fecha[1], fecha[2], fecha[3]];
+			var fechaBD = array.join(" ");
+			*/
+			//console.log($scope.formatoFecha.toString().split(" "));
 
 			APIClient.modificarProyecto($scope.model).then(
 
@@ -76,6 +89,9 @@ angular.module("toDoBabel").controller("ModificarProyectoController",
                     $scope.$emit("ErroresLogin", data.err);
                 }else{
                     $scope.model = data.rows[0];
+              
+					$scope.formatoFecha = new Date($scope.model.fecha);
+					
 					/*
 					//transformo la fecha que me viene en string a date para el formulario.
 					$scope.model.fecha = new Date($scope.model.fecha);
