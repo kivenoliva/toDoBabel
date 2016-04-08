@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default menu navbar-fixed-top" ng-controller="MenuController">
-    <div class="container-fluid" ng-if="view != 'login'">
+<nav class="menu navbar navbar-default navbar-fixed-top" ng-controller="MenuController">
+    <div class="container" ng-if="view != 'login'">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -13,21 +13,21 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li ng-class="getClassForItem(paths.proyectos)">
-                    <a href="#{{::paths.proyectos}}">Proyectos empresa</a>
+                    <a ng-class="getClassForItem(paths.proyectos)" href="#{{::paths.proyectos}}">Proyectos empresa</a>
                 </li>
                 <li ng-class="getClassForItem(paths.proyectosUser)">
-                    <a href="#{{::paths.proyectosUser}}">Tus proyectos</a>
+                    <a ng-class="getClassForItem(paths.proyectosUser)" href="#{{::paths.proyectosUser}}">Tus proyectos</a>
                 </li>
                 <li ng-class="getClassForItem(paths.tareasUser)">
-                    <a href="#{{::paths.tareasUser}}">Tus tareas</a>
+                    <a ng-class="getClassForItem(paths.tareasUser)" href="#{{::paths.tareasUser}}">Tus tareas</a>
                 </li>
                 <li ng-class="getClassForItem(paths.gente)">
-                    <a href="#{{::paths.gente}}">Gente</a>
+                    <a ng-class="getClassForItem(paths.gente)" href="#{{::paths.gente}}">Gente</a>
                 </li>
             </ul>
             
-            <button class="btn btn-danger pull-right logout"  ng-click="logout()">Log Out</button>
-            <a href="#{{::paths.nuevoProyecto}}" class="btn pull-right btn-primary logout">Añadir Proyecto</a>
+            <button style="background-color:Maroon"class="btn btn-danger pull-right logout"  ng-click="logout()">Log Out</button>
+            <a href="#{{::paths.nuevoProyecto}}" class="btn pull-right btn-primary logout"><i class="fa fa-plus"></i> Añadir Proyecto</a>
         </div>
     </div>
 </nav>

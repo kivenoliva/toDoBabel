@@ -8815,12 +8815,31 @@ button.close {
 .boton-registro {
   margin-right: 15px;
 }
+h1 {
+  color: #db4c3f !important;
+}
 .logout {
   margin-right: 20px;
   margin-top: 8px;
 }
 .menu {
-  background-color: silver;
+  background-color: #db4c3f;
+}
+.ancho {
+  background-color: WhiteSmoke;
+}
+.imagenBabel {
+  margin: 0 auto;
+}
+a {
+  color: white !important;
+}
+.active {
+  color: black !important;
+  background-color: grey;
+}
+.lista-proyectos {
+  text-align: center;
 }
 .boton-tarea {
   margin-top: 3px;
@@ -8831,7 +8850,7 @@ button.close {
 .user {
   text-align: center;
   border-radius: 10%;
-  background-color: silver;
+  background-color: #db4c3f;
 }
 .contenidoUser {
   padding-bottom: 10%;

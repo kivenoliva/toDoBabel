@@ -16,9 +16,16 @@ angular.module("toDoBabel").controller("NuevoProyectoController",
 		};
 
 		$scope.sumarTarea = function(){
-			
 			$scope.tareasSumadas.push($scope.model.tareas);
 			
+		};
+
+		$scope.borrarTarea = function(item){
+			for (var i=0; i < $scope.tareasSumadas.length; i++){
+				if($scope.tareasSumadas[i] == item){
+					$scope.tareasSumadas.splice(i,1);
+				}
+			};
 		};
 
 		$scope.sumarProyecto = function(){

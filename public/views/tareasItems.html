@@ -30,7 +30,7 @@
             <td>
                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})">He terminado</button>
-               <button class="btn btn-danger pull-right boton-tarea" ng-click="borrarTarea({tarea:item})">Borrar</button>
+               <button class="btn btn-danger pull-right boton-tarea" ng-click="borrarTarea({tarea:item})"><i class="fa fa-trash-o"></i></button>
             </td>
         </tr>
     </tbody>
