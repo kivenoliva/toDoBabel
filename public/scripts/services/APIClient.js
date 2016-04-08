@@ -190,6 +190,47 @@ angular.module("toDoBabel").service("APIClient",
             //devolver la promesa
             return deferred.promise; 
         };
+
+        this.deleteTarea = function(idP, idT){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            var urlBien  = URL.resolve(api_paths.borrarTarea, {idP: idP, idT: idT});
+            console.log("URL", urlBien);
+            $http.delete(urlBien).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+
+        this.deleteProyecto = function(id){
+            //Crear el objeto diferido
+            var deferred = $q.defer();
+            //Hacer trabajo asíncrono
+            console.log("id apiCliente", id)
+            var urlBien  = URL.resolve(api_paths.borrarProyecto, {id: id});
+            $http.delete(urlBien).then(
+                function(response){
+                        //resolver la promesa
+                        deferred.resolve(response.data);
+                },
+                function(response){
+                        //rechazar la promesa
+                        deferred.reject(response.data);
+                }
+            );
+            //devolver la promesa
+            return deferred.promise; 
+        };
+
     
     }]
 );

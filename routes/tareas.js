@@ -33,14 +33,14 @@ function selecTareas(proyectos, user){
 };
 
 
-function borrarTarea(proyecto, tarea, res){
+function borrarTarea(proyecto, id, res){
     
     var tareasNuevas = [];
     var tareaEncontrada = false;
     
     for(var i = 0; i < proyecto[0].tareas.length; i++){
         
-        if (proyecto[0].tareas[i].tarea != tarea.tarea){
+        if (proyecto[0].tareas[i]._id != id){
             tareasNuevas.push(proyecto[0].tareas[i]);
         }else{
             tareaEncontrada = true;
@@ -189,8 +189,9 @@ router.put('/', function(req, res, next) {
 });
 
 //Método delete que borra una tarea
-router.delete('/', function(req, res, next) {
-    var query = Proyecto.find({ nombre : req.body.proyecto});
+router.delete('/:idProyecto/:idTarea', function(req, res, next) {
+    console.log("llega", req.params.idProyecto);
+    var query = Proyecto.find({ _id: req.params.idProyecto});
     query.exec(function(err, rows){
         if (err){
             res.json({result: false, err: "Error al obtener proyecto de la base de datos."});
@@ -202,7 +203,8 @@ router.delete('/', function(req, res, next) {
             return;
         }
 
-        borrarTarea(rows, req.body, res);
+        borrarTarea(rows, req.params.idTarea, res);
+        //console.log(newRow);
         res.json({result: true, rows: "Tarea borrada correctamente"});
         return;
     });

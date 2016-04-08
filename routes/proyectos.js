@@ -123,9 +123,10 @@ router.put('/', function(req, res, next) {
 });
 
 //Método delete que borra un proyecto
-router.delete('/', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
 
-    Proyecto.remove({nombre: req.body.nombre}, function(err, rows) {
+    console.log("llega delete", req.params.id);
+    Proyecto.remove({_id: req.params.id}, function(err, rows) {
         if (err) {
             res.json({result: false, err: "Error al eliminar el proyecto."});
             return;

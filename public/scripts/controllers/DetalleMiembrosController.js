@@ -7,7 +7,7 @@ angular.module("toDoBabel").controller("DetalleMiembrosController",
 		$scope.model = [];
 		$scope.usuario = autentication.getLoginLocal()[1];
 		
-		console.log($scope.model);
+		//console.log($scope.model);
 		//Scope methods
 		//Scope methods
 		$scope.volver = function(){
