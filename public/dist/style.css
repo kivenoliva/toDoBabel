@@ -8857,3 +8857,33 @@ a {
   padding-top: 10%;
   margin-bottom: 10%;
 }
+.columna {
+  border-style: solid;
+  border-width: 4px;
+  border-color: #db4c3f;
+  overflow: auto;
+  padding-bottom: 1%;
+}
+.tareaTabla {
+  border-bottom-style: solid;
+  border-bottom-width: 4px;
+  border-bottom-color: #db4c3f;
+  border-top-style: solid;
+  border-top-width: 4px;
+  border-top-color: #db4c3f;
+  overflow: auto;
+  padding-bottom: 1%;
+  padding-bottom: 5%;
+}
+.pTabla {
+  padding-top: 5%;
+}
+.hTareas {
+  color: #db4c3f;
+}
+.letraGente {
+  color: white;
+}
+.btn-masTareas {
+  margin-top: 1%;
+}

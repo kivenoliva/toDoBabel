@@ -1,3 +1,75 @@
+<div>
+    
+        <div class="col-md-4 columna">
+            <h3 class="hTareas">Tareas todavia sin asignar</h3>
+            <br>
+            <div ng-repeat="item in model" class="tareaTabla" ng-if="item.estado == 'NoAsignada'">
+                <p class="pTabla"><strong>{{::item.tarea}}</strong></p>
+                <br>
+                <p class><strong>Proyecto: </strong>{{item.proyecto}}</p>
+                <p class><strong>Propietario: </strong>{{item.propietario}}</p>
+                <h4><span class="label label-danger" ng-if="item.estado == 'NoAsignada'">Sin asignar</span></h4>
+                <h4><span class="label label-success" ng-if="item.estado == 'Finalizada'">{{item.estado}}</span></h4>
+                <h4><span class="label label-primary" ng-if="item.estado == 'Empezada'">{{item.estado}}</span></h4>
+
+                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
+               <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})">He terminado</button>
+               <button class="btn btn-danger boton-tarea" ng-click="borrarTarea({tarea:item})"><i class="fa fa-trash-o"></i></button>
+
+            </div>
+        </div>
+
+        <div class="col-md-4 columna">
+            <h3 class="hTareas">Tareas haciendose</h3>
+            <br>
+            <div ng-repeat="item in model" class="tareaTabla" ng-if="item.estado == 'Empezada'">
+                <p class="pTabla"><strong>{{::item.tarea}}</strong></p>
+                <br>
+                <p class><strong>Proyecto: </strong>{{item.proyecto}}</p>
+                <p class><strong>Propietario: </strong>{{item.propietario}}</p>
+                <h4><span class="label label-danger" ng-if="item.estado == 'NoAsignada'">Sin asignar</span></h4>
+                <h4><span class="label label-success" ng-if="item.estado == 'Finalizada'">{{item.estado}}</span></h4>
+                <h4><span class="label label-primary" ng-if="item.estado == 'Empezada'">{{item.estado}}</span></h4>
+
+                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
+               <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})">He terminado</button>
+               <button class="btn btn-danger boton-tarea" ng-click="borrarTarea({tarea:item})"><i class="fa fa-trash-o"></i></button>
+
+            </div>
+        </div>
+
+        <div class="col-md-4 columna">
+            <h3 class="hTareas">Tareas finalizadas</h3>
+            <br>
+            <div ng-repeat="item in model" class="tareaTabla" ng-if="item.estado == 'Finalizada'">
+                <p class="pTabla"><strong>{{::item.tarea}}</strong></p>
+                <br>
+                <p class><strong>Proyecto: </strong>{{item.proyecto}}</p>
+                <p class><strong>Propietario: </strong>{{item.propietario}}</p>
+                <h4><span class="label label-danger" ng-if="item.estado == 'NoAsignada'">Sin asignar</span></h4>
+                <h4><span class="label label-success" ng-if="item.estado == 'Finalizada'">{{item.estado}}</span></h4>
+                <h4><span class="label label-primary" ng-if="item.estado == 'Empezada'">{{item.estado}}</span></h4>
+
+                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
+               <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})">He terminado</button>
+               <button class="btn btn-danger boton-tarea" ng-click="borrarTarea({tarea:item})"><i class="fa fa-trash-o"></i></button>
+
+            </div>
+        </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <div class="table-responsive">
     
 
