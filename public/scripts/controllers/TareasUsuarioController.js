@@ -6,6 +6,7 @@ angular.module("toDoBabel").controller("TareasUsuarioController",
         $scope.uiState = "loading";
         $scope.model = [];
         $scope.usuario = autentication.getLoginLocal()[1];
+        $scope.modo = "noDetalle";
 
         //Scope methods
         $scope.cambioTarea = function(tarea, usuario){
@@ -43,47 +44,6 @@ angular.module("toDoBabel").controller("TareasUsuarioController",
             );
 
 
-        };
-
-        $scope.borrarTarea = function(tarea){
-            console.log(tarea);
-            /*
-            //Borro del model la tarea, luego actualizo la base de datos
-            for(var i = 0; i<$scope.model.length; i++){
-
-                if($scope.model._id == tarea._id){
-                    $scope.model.splice(i,1);
-                }
-
-            }
-            
-            //Pido el proyecto por el nombre
-            /******FALLOOOOOOOOOOOO***********
-            
-            //console.log(tarea);
-            APIClient.deleteTarea($scope.model._id, tarea._id).then(
-
-                //primero siempre el succes
-                function(data){
-                    if(!data.result){
-                        alert(data.err);
-                    }else{
-                        //$scope.model = data.rows;
-                        console.log(data.rows);
-                        if($scope.model.length == 0){
-                            $scope.uiState = "blank";
-                        }else{
-                            $scope.uiState = "ideal";
-                        }
-                    }       
-                },
-
-                //segundo si ha habido error
-                function(data){
-                    $log.error("Error", data);
-                    $scope.uiState = "error";
-                }
-            );/*/
         };
         
         // Controller start

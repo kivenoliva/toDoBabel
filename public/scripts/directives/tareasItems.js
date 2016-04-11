@@ -5,7 +5,8 @@ angular.module("toDoBabel").directive("tareasItems", function(){
 			model:"=items",
 			usuario:"=",
 			cambioTarea:"&",
-			borrarTarea:"&"
+			borrarTarea:"&",
+			modo:"="
 		},
 		templateUrl:"views/tareasItems.html"
 	};

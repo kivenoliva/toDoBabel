@@ -8825,9 +8825,6 @@ h1 {
 .menu {
   background-color: #db4c3f;
 }
-.ancho {
-  background-color: WhiteSmoke;
-}
 .imagenBabel {
   margin: 0 auto;
 }
@@ -8886,4 +8883,17 @@ a {
 }
 .btn-masTareas {
   margin-top: 1%;
+}
+.btn-detalle {
+  margin-left: 2%;
+  margin-bottom: 2%;
+}
+.btn-masTareas {
+  margin-top: 4%;
+}
+.listadoTareas {
+  margin-top: 2%;
+}
+.letras-rojas {
+  color: #db4c3f;
 }

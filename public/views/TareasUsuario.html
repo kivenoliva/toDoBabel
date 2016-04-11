@@ -7,8 +7,7 @@
 	</div>   
 	
 	<h1 class="text-primary" ng-show="uiState == 'ideal'">Tareas de {{usuario}}: </h1>
-	<br>
-	<br>
-	<tareas-items items="model" cambio-tarea="cambioTarea(stuff, user)" borrar-tarea="borrarTarea(tarea)" ng-show="uiState =='ideal'"  usuario="usuario"></tareas-items> 
+
+	<tareas-items items="model" cambio-tarea="cambioTarea(stuff, user)" borrar-tarea="borrarTarea(tarea)" ng-show="uiState =='ideal'"  usuario="usuario" modo="modo"></tareas-items> 
 
 </div>
