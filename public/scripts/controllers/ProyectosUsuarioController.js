@@ -19,7 +19,7 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
         $scope.nextPaginacion = function(){
 
 			$scope.empiece = $scope.empiece + $scope.limite;
-			APIClient.getProyectos($scope.empiece, $scope.limite).then(
+			APIClient.getProyectosUsuario($scope.empiece, $scope.limite).then(
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
@@ -48,7 +48,7 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 		$scope.previusPaginacion = function(){
 
 			$scope.empiece = $scope.empiece - $scope.limite;
-			APIClient.getProyectos($scope.empiece, $scope.limite).then(
+			APIClient.getProyectosUsuario($scope.empiece, $scope.limite).then(
 				//primero siempre el succes
 				function(data){
 					if(!data.result){
@@ -76,6 +76,7 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 
 		
 		// Controller start
+		console.log($scope.usuario)
 		APIClient.getProyectosUsuario($scope.usuario).then(
 
 			//primero siempre el succes
@@ -84,10 +85,14 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 				if(!data.result){
                     alert(data.err);
                 }else{
+                	console.log(data.rows);
                     $scope.model = data.rows;
 
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
+						$scope.sinDatos = true;
+					}else if($scope.model.length < 4){
+						$scope.uiState = "ideal";
 						$scope.sinDatos = true;
 					}else{
 						$scope.uiState = "ideal";

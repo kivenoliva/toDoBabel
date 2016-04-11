@@ -83,6 +83,9 @@ angular.module("toDoBabel").controller("ProyectosController",
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
 						$scope.sinDatos = true;
+					}else if($scope.model.length < 4){
+						$scope.uiState = "ideal";
+						$scope.sinDatos = true;
 					}else{
 						$scope.uiState = "ideal";
 						$scope.sinDatos = false;

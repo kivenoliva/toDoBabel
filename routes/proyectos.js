@@ -67,7 +67,7 @@ router.get('/usuario/:nombre', function(req, res, next) {
 
     console.log("INIT", init);
     console.log("LIMITE", limite)
-    var query = Proyecto.find({}).skip(init).limit(limite);
+    var query = Proyecto.find({});//.skip(init).limit(limite);
     query.exec(function(err, rows){
         if (err){
             res.json({result: false, err: "Error al obtener todos los proyectos de la base de datos."});
@@ -81,6 +81,26 @@ router.get('/usuario/:nombre', function(req, res, next) {
         		arrayProyectosSelecc.push(rows[i]);
         	}
         }
+
+        var arrayPaginacion = [];
+        if (init == 0){
+            for(var i = init; i<limite; i++){
+                if(arrayProyectosSelecc[i]!=undefined){
+                    arrayPaginacion.push(arrayProyectosSelecc[i]);
+                }
+                
+            }
+        }else{
+            for(var i = init; i<=limite; i++){
+                if(arrayProyectosSelecc[i]!=undefined){
+                    arrayPaginacion.push(arrayProyectosSelecc[i]);
+                }
+            }
+        }
+
+
+        
+        console.log(arrayPaginacion);
 
         res.json({result: true, rows: arrayProyectosSelecc});
         return;
