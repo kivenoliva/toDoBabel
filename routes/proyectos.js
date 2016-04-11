@@ -67,8 +67,6 @@ router.get('/usuario/:nombre', function(req, res, next) {
         limite = parseInt(req.query.limit);
     }
 
-    console.log("INIT", init);
-    console.log("LIMITE", limite)
     var query = Proyecto.find({});//.skip(init).limit(limite);
     query.exec(function(err, rows){
         if (err){
