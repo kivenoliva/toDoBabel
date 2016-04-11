@@ -23,7 +23,6 @@
     "moment": "^2.12.0",
     "angular-sanitize": "^1.5.3",
     "angular-PubSub": "angular.pubsub#*",
-    "sha256": "^0.2.0",
     "font-awesome": "^4.5.0"
   }
 }

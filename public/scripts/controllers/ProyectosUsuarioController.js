@@ -9,6 +9,7 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 		//globales que mantengo actualizadas para el tema de paginacion
 		$scope.empiece = 0;
 		$scope.limite = 4;
+		$scope.sinDatos = false;
 
 		// Scope métodos
 		$scope.getMovieDetailURL = function(proyecto){
@@ -28,8 +29,10 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 
 						if($scope.model.length == 0){
 							$scope.uiState = "blank";
+							$scope.sinDatos = true;
 						}else{
 							$scope.uiState = "ideal";
+							$scope.sinDatos = false;
 						}
 	                }	
 				},
@@ -45,7 +48,6 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 		$scope.previusPaginacion = function(){
 
 			$scope.empiece = $scope.empiece - $scope.limite;
-			console.log($scope.empiece, $scope.limite)
 			APIClient.getProyectos($scope.empiece, $scope.limite).then(
 				//primero siempre el succes
 				function(data){
@@ -56,8 +58,10 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 
 						if($scope.model.length == 0){
 							$scope.uiState = "blank";
+							$scope.sinDatos = true;
 						}else{
 							$scope.uiState = "ideal";
+							$scope.sinDatos = false;
 						}
 	                }	
 				},
@@ -84,8 +88,10 @@ angular.module("toDoBabel").controller("ProyectosUsuarioController",
 
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
+						$scope.sinDatos = true;
 					}else{
 						$scope.uiState = "ideal";
+						$scope.sinDatos = false;
 					}
                 }		
 			},

@@ -2,9 +2,9 @@
 	<div ng-include="'views/progressBar.html'" ng-show="uiState == 'loading'"></div>
 
 	<div class="jumbotron" ng-show="uiState == 'blank'">
-		<p class="lead">No existen datos.</p>
+		<p class="lead" >No existen datos.</p>
 	</div>  
-	<h1>Gente</h1>
+	<h1 ng-show="uiState == 'ideal'">Gente</h1>
 	<usuarios-items items="model"></usuarios-items>
 
 	<div class="container">
@@ -12,7 +12,7 @@
 			<nav>
 			  <ul class="pager">
 			    <li><a class="paginacion" ng-click="previusPaginacion()" href="" ng-hide="empiece == 0">Previous</a></li>
-			    <li><a class="paginacion" ng-click="nextPaginacion()" href="">Next</a></li>
+			    <li><a class="paginacion" ng-click="nextPaginacion()" href="" ng-hide="sinDatos == true">Next</a></li>
 			  </ul>
 			</nav>
 		</div>

@@ -10,6 +10,7 @@ angular.module("toDoBabel").controller("GenteController",
 		//globales que mantengo actualizadas para el tema de paginacion
 		$scope.empiece = 0;
 		$scope.limite = 6;
+		$scope.sinDatos = false;
 
 
 		//Scope methods
@@ -26,8 +27,10 @@ angular.module("toDoBabel").controller("GenteController",
 
 						if($scope.model.length == 0){
 							$scope.uiState = "blank";
+							$scope.sinDatos = true;
 						}else{
 							$scope.uiState = "ideal";
+							$scope.sinDatos = false;
 						}
 	                }	
 				},
@@ -54,8 +57,10 @@ angular.module("toDoBabel").controller("GenteController",
 
 						if($scope.model.length == 0){
 							$scope.uiState = "blank";
+							$scope.sinDatos = true;
 						}else{
 							$scope.uiState = "ideal";
+							$scope.sinDatos = false;
 						}
 	                }	
 				},
@@ -82,8 +87,10 @@ angular.module("toDoBabel").controller("GenteController",
 					console.log("despues", $scope.model)
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";
+						$scope.sinDatos = true;
 					}else{
 						$scope.uiState = "ideal";
+						$scope.sinDatos = false;
 					}
                 }					
 			},

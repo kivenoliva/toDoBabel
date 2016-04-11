@@ -45,7 +45,9 @@
 				<button type="button" class="btn btn-warning btn-masTareas" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>  Añadir una nueva tarea</button>
 			</div>
 		</div>
-		
+	</div>
+
+	<div class="row">
 		<tareas-items items="model.tareas" cambio-tarea="cambioTarea(stuff, user)" ng-show="uiState =='ideal'"  usuario="usuario" borrar-tarea="borrarTarea(tarea)"></tareas-items> 
 	</div>
 
@@ -71,10 +73,15 @@
 
 	
 	<br>
-	<div class="container">
-		<button class="btn btn-primary btn-detalle pull-right" ng-click="volver()">Volver a tus proyectos</button>
-		<button class="btn btn-warning pull-right btn-detalle" ng-click="modificarProyecto(model._id)">Modificar proyecto</button>
-		<button class="btn btn-danger pull-right" ng-click="borrarProyecto()">Borrar proyecto</button>
+	<div class="container botones-detalle">
+
+		<button class="btn btn-danger pull-right btn-detalle margen-tabla" ng-click="borrarProyecto()">Borrar proyecto</button>
+		<button class="btn btn-warning pull-right btn-detalle margen-tabla" ng-click="modificarProyecto(model._id)">Modificar proyecto</button>
+		<button class="btn btn-primary  pull-right btn-detalle margen-tabla" ng-click="volver()">Volver a tus proyectos</button>
+		
+		
+
+		
 	</div>
 	<br>
 	<br>

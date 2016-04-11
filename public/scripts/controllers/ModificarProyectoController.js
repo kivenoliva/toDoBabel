@@ -6,7 +6,8 @@ angular.module("toDoBabel").controller("ModificarProyectoController",
 		$scope.uiState = "loading";
 		$scope.model = {};
 		$scope.usuario = autentication.getLoginLocal()[1];
-		$scope.formatoFecha = new Date("0000/00/00");
+		$scope.formatoFecha = new Date("2016/4/28");
+		
 
 		//Scope methods
 		$scope.volver = function(){
@@ -75,8 +76,8 @@ angular.module("toDoBabel").controller("ModificarProyectoController",
                     alert(data.err);
                 }else{
                     $scope.model = data.rows[0];
-                    $scope.$emit("ChangeTitle", "Modificar Proyecto");             
-					$scope.formatoFecha = new Date("$scope.model.fecha");
+                    $scope.$emit("ChangeTitle", "Modificar Proyecto");   
+					$scope.formatoFecha = new Date($scope.model.fecha);
 
 					if($scope.model.length == 0){
 						$scope.uiState = "blank";

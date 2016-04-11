@@ -1,4 +1,4 @@
-<div class="row listadoTareas">
+<div class="listadoTareas">
     
         <div class="col-md-4 columna">
             <h3 class="hTareas">Tareas todavia sin asignar</h3>
@@ -12,9 +12,10 @@
                 <h4><span class="label label-success" ng-if="item.estado == 'Finalizada'">{{item.estado}}</span></h4>
                 <h4><span class="label label-primary" ng-if="item.estado == 'Empezada'">{{item.estado}}</span></h4>
 
-                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
-               <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})">He terminado</button>
-               <button class="btn btn-danger boton-tarea" ng-hide="modo == 'noDetalle'" ng-click="borrarTarea({tarea:item})"><i class="fa fa-trash-o"></i></button>
+                <button class="btn btn-danger pull-right" ng-hide="modo == 'noDetalle'" ng-click="borrarTarea({tarea:item})"><i class="fa fa-trash-o"></i></button>
+                <button class="btn btn-primary pull-right btn-empezarTarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})"><i class="fa fa-play"></i></button>
+                <button class="btn btn-primary pull-right btn-empezarTarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})"><i class="fa fa-check"></i></button>
+                
 
             </div>
         </div>
@@ -31,9 +32,11 @@
                 <h4><span class="label label-success" ng-if="item.estado == 'Finalizada'">{{item.estado}}</span></h4>
                 <h4><span class="label label-primary" ng-if="item.estado == 'Empezada'">{{item.estado}}</span></h4>
 
-                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
-                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})">He terminado</button>
-                <button class="btn btn-danger boton-tarea" ng-hide="modo == 'noDetalle'" ng-click="borrarTarea({tarea:item})" ><i class="fa fa-trash-o"></i></button>
+                <button class="btn btn-danger pull-right" ng-hide="modo == 'noDetalle'" ng-click="borrarTarea({tarea:item})" ><i class="fa fa-trash-o"></i></button>
+                <button class="btn btn-primary pull-right btn-empezarTarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})"><i class="fa fa-play"></i></button>
+                <button class="btn btn-primary pull-right btn-empezarTarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})"><i class="fa fa-check"></i></button>
+                
+             
 
             </div>
         </div>
@@ -50,9 +53,10 @@
                 <h4><span class="label label-success" ng-if="item.estado == 'Finalizada'">{{item.estado}}</span></h4>
                 <h4><span class="label label-primary" ng-if="item.estado == 'Empezada'">{{item.estado}}</span></h4>
 
-                <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})">Empezar tarea</button>
-               <button class="btn btn-primary boton-tarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})">He terminado</button>
-               <button class="btn btn-danger boton-tarea" ng-hide="modo == 'noDetalle'" ng-click="borrarTarea({tarea:item})"><i class="fa fa-trash-o"></i></button>
+                <button class="btn btn-danger pull-right" ng-hide="modo == 'noDetalle'" ng-click="borrarTarea({tarea:item})" ><i class="fa fa-trash-o"></i></button>
+                <button class="btn btn-primary pull-right btn-empezarTarea" ng-if="item.estado == 'NoAsignada'" ng-click="cambioTarea({stuff:item, user:usuario})"><i class="fa fa-play"></i></button>
+                <button class="btn btn-primary pull-right btn-empezarTarea" ng-if="item.estado == 'Empezada' && item.propietario == usuario" ng-click="cambioTarea({stuff:item, user:usuario})"><i class="fa fa-check"></i></button>
+               
 
             </div>
         </div>
