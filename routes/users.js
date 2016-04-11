@@ -48,7 +48,17 @@ var getUsers = function(miembros){
 
 //Método get que devuelve una lista con todos los usuarios, por si fuera necesario.
 router.get('/', function(req, res, next) {
-    var query = Usuario.find({});
+
+	var init = 0;
+    if (req.query.start){
+        init = parseInt(req.query.start);
+    }
+    
+    var limite = 1000;  //si no me filtran límte de devolución, mi APi por defecto devuelve 1000
+    if (req.query.limit){
+        limite = parseInt(req.query.limit);
+    }
+    var query = Usuario.find({}).skip(init).limit(limite);
     query.exec(function(err, rows){
         if (err){
             res.json({result: false, err: "Error al obtener todos los usuarios de la base de datos."});
@@ -61,6 +71,7 @@ router.get('/', function(req, res, next) {
 
 //Método get que devuelve todos los usuarios de un proyecto.
 router.get('/proyecto/:id', function(req, res, next) {
+
     var query = Proyecto.find({_id: req.params.id});
     query.exec(function(err, rows){
         if (err){
@@ -72,16 +83,16 @@ router.get('/proyecto/:id', function(req, res, next) {
             return;
 
         }
-	getUsers(rows[0].miembros).then( function() {
-		console.log("FIN");
-		var respuesta = arrayMiembros;
-		arrayMiembros = [];
-		res.json({result: true, rows: respuesta});
-        		return;
-	}).catch( function(error) {
-		console.log("ERROR EN PROMESAS");
-		//process.exit(1);
-	});
+		getUsers(rows[0].miembros).then( function() {
+			console.log("FIN");
+			var respuesta = arrayMiembros;
+			arrayMiembros = [];
+			res.json({result: true, rows: respuesta});
+	        		return;
+		}).catch( function(error) {
+			console.log("ERROR EN PROMESAS");
+			process.exit(1);
+		});
         
     });
 });

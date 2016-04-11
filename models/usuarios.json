@@ -23,6 +23,54 @@
 			"email": "Jesus@gmail.com",
 			"url_imagen":"https://crm.apd.es/apdlibrary/Portal/69617530-98DB-4272-A77C-4209CE37123C.jpg",
 			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+		},
+		{
+			"nombre": "kevin",
+			"email": "kivenoliva@gmail.com",
+			"url_imagen":"http://babel.es/sites/default/files/styles/large_foto_empleado/public/1455641756_0?itok=ov64WAN3",
+			"clave": "85f5e10431f69bc2a14046a13aabaefc660103b6de7a84f75c4b96181d03f0b5"
+		},
+		{
+			"nombre": "araujo",
+			"email": "araujo@gmail.com",
+			"url_imagen":"https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/1/005/00e/133/364dbbe.jpg",
+			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+		},
+		{
+			"nombre": "Guillermo",
+			"email": "Guillermo@gmail.com",
+			"url_imagen":"https://pbs.twimg.com/profile_images/378800000263268308/13c63c843ea8413b6282b322302a912a_400x400.jpeg",
+			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+		},
+		{
+			"nombre": "Jesús",
+			"email": "Jesus@gmail.com",
+			"url_imagen":"https://crm.apd.es/apdlibrary/Portal/69617530-98DB-4272-A77C-4209CE37123C.jpg",
+			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+		},
+		{
+			"nombre": "kevin",
+			"email": "kivenoliva@gmail.com",
+			"url_imagen":"http://babel.es/sites/default/files/styles/large_foto_empleado/public/1455641756_0?itok=ov64WAN3",
+			"clave": "85f5e10431f69bc2a14046a13aabaefc660103b6de7a84f75c4b96181d03f0b5"
+		},
+		{
+			"nombre": "araujo",
+			"email": "araujo@gmail.com",
+			"url_imagen":"https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/1/005/00e/133/364dbbe.jpg",
+			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+		},
+		{
+			"nombre": "Guillermo",
+			"email": "Guillermo@gmail.com",
+			"url_imagen":"https://pbs.twimg.com/profile_images/378800000263268308/13c63c843ea8413b6282b322302a912a_400x400.jpeg",
+			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+		},
+		{
+			"nombre": "Jesús",
+			"email": "Jesus@gmail.com",
+			"url_imagen":"https://crm.apd.es/apdlibrary/Portal/69617530-98DB-4272-A77C-4209CE37123C.jpg",
+			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
 		}
 	]
 }

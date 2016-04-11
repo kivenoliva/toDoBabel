@@ -8,4 +8,15 @@
 	
 	<proyectos-items items="model" ng-show="uiState =='ideal'" get-detail-url="getMovieDetailURL(stuff)" modo="proyectos_user" usuario="usuario"></proyectos-items> 
 
+	<div class="container">
+		<div class="row">
+			<nav>
+			  <ul class="pager">
+			    <li><a class="paginacion" ng-click="previusPaginacion()" href="" ng-hide="empiece == 0">Previous</a></li>
+			    <li><a class="paginacion" ng-click="nextPaginacion()" href="">Next</a></li>
+			  </ul>
+			</nav>
+		</div>
+	</div>
+
 </div>

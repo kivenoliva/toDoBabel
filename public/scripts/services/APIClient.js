@@ -1,12 +1,25 @@
 angular.module("toDoBabel").service("APIClient", 
-    ["$http", "$q", "api_paths", "URL","$log", function($http, $q, api_paths, URL, $log){
+    ["$http", "$q", "api_paths", "URL","$log","URL_paginacion", function($http, $q, api_paths, URL, $log, URL_paginacion){
 
+        //variable global por defecto en mi aplicación pido un limite de 4 items al servidor
+        //para el tema de la paginación.
+        var limiteGlobal = 4;
+        var limiteGlobalGente = 6;
         
-        this.getProyectos = function(){
+        this.getProyectos = function(start, limite){
+            var url = api_paths.proyectos;
+            var start = start;
+            var limite = limite;
+            if(start == undefined && limite == undefined){
+                start = 0;
+                limite = limiteGlobal;
+                
+            }
+            url = URL_paginacion.resolve(api_paths.proyectos, start, limite); 
             //Crear el objeto diferido
             var deferred = $q.defer();
             //Hacer trabajo asíncrono
-            $http.get(api_paths.proyectos).then(
+            $http.get(url).then(
                 function(response){
                         //resolver la promesa
                         deferred.resolve(response.data);
@@ -20,12 +33,21 @@ angular.module("toDoBabel").service("APIClient",
             return deferred.promise; 
         };
         
-        this.getProyectosUsuario = function(id){
+        this.getProyectosUsuario = function(id, start, limite){
+            var url = URL.resolve(api_paths.proyectosUsuario, {id: id});
+            var start = start;
+            var limite = limite;
+            if(start == undefined && limite == undefined){
+                start = 0;
+                limite = limiteGlobal;
+                
+            }
+            url = URL_paginacion.resolve(url, start, limite); 
+
             //Crear el objeto diferido
             var deferred = $q.defer();
-            //Hacer trabajo asíncrono
-            var urlBien  = URL.resolve(api_paths.proyectosUsuario, {id: id});
-            $http.get(urlBien).then(
+            
+            $http.get(url).then(
                 function(response){
                         //resolver la promesa
                         deferred.resolve(response.data);
@@ -134,11 +156,20 @@ angular.module("toDoBabel").service("APIClient",
             return deferred.promise; 
         };
 
-        this.getGente = function(){
+        this.getGente = function(start, limite){
+            var url = api_paths.gente
+            var start = start;
+            var limite = limite;
+            if(start == undefined && limite == undefined){
+                start = 0;
+                limite = limiteGlobalGente;
+                
+            }
+            url = URL_paginacion.resolve(url, start, limite); 
             //Crear el objeto diferido
             var deferred = $q.defer();
             //Hacer trabajo asíncrono
-            $http.get(api_paths.gente).then(
+            $http.get(url).then(
                 function(response){
                         //resolver la promesa
                         deferred.resolve(response.data);

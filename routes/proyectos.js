@@ -29,7 +29,17 @@ function nombreUnico (nombre, callback){
 
 //Método get que devuelve una lista con todos los proyectos de la empresa, por si fuera necesario.
 router.get('/', function(req, res, next) {
-    var query = Proyecto.find({});
+    var init = 0;
+    if (req.query.start){
+        init = parseInt(req.query.start);
+    }
+    
+    var limite = 1000;  //si no me filtran límte de devolución, mi APi por defecto devuelve 1000
+    if (req.query.limit){
+        limite = parseInt(req.query.limit);
+    }
+
+    var query = Proyecto.find({}).skip(init).limit(limite);
     query.exec(function(err, rows){
         if (err){
             res.json({result: false, err: "Error al obtener todos los proyectos de la base de datos."});
@@ -42,9 +52,22 @@ router.get('/', function(req, res, next) {
 
 //Método que devuelve los proyectos de usuario metido
 router.get('/usuario/:nombre', function(req, res, next) {
-   var user = req.params.nombre;
+    var user = req.params.nombre;
 
-    var query = Proyecto.find({});
+
+    var init = 0;
+    if (req.query.start){
+        init = parseInt(req.query.start);
+    }
+    
+    var limite = 1000;  //si no me filtran límte de devolución, mi APi por defecto devuelve 1000
+    if (req.query.limit){
+        limite = parseInt(req.query.limit);
+    }
+
+    console.log("INIT", init);
+    console.log("LIMITE", limite)
+    var query = Proyecto.find({}).skip(init).limit(limite);
     query.exec(function(err, rows){
         if (err){
             res.json({result: false, err: "Error al obtener todos los proyectos de la base de datos."});

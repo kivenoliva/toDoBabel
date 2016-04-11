@@ -38870,7 +38870,70 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$scope.uiState = "loading";
 		$scope.model = [];
 		$scope.usuario = autentication.getLoginLocal()[1];
-		
+
+		//globales que mantengo actualizadas para el tema de paginacion
+		$scope.empiece = 0;
+		$scope.limite = 6;
+
+
+		//Scope methods
+		$scope.nextPaginacion = function(){
+
+			$scope.empiece = $scope.empiece + $scope.limite;
+			APIClient.getGente($scope.empiece, $scope.limite).then(
+				//primero siempre el succes
+				function(data){
+					if(!data.result){
+	                    alert(data.err);
+	                }else{
+	                    $scope.model = data.rows;
+
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+	                }	
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
+		};
+
+		$scope.previusPaginacion = function(){
+
+			$scope.empiece = $scope.empiece - $scope.limite;
+			console.log($scope.empiece, $scope.limite)
+			APIClient.getGente($scope.empiece, $scope.limite).then(
+				//primero siempre el succes
+				function(data){
+					if(!data.result){
+	                    alert(data.err);
+	                }else{
+	                    $scope.model = data.rows;
+
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+	                }	
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
+		};
+
+
+		//Scope start
 		APIClient.getGente().then(
 
 			//primero siempre el succes
@@ -39185,14 +39248,71 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$scope.uiState = "loading";
 		$scope.model = [];
 		$scope.usuario = autentication.getLogin()[1];
+		//globales que mantengo actualizadas para el tema de paginacion
+		$scope.empiece = 0;
+		$scope.limite = 4;
 
+
+		//Scope methods
+		$scope.nextPaginacion = function(){
+
+			$scope.empiece = $scope.empiece + $scope.limite;
+			APIClient.getProyectos($scope.empiece, $scope.limite).then(
+				//primero siempre el succes
+				function(data){
+					if(!data.result){
+	                    alert(data.err);
+	                }else{
+	                    $scope.model = data.rows;
+
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+	                }	
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
+		};
+
+		$scope.previusPaginacion = function(){
+
+			$scope.empiece = $scope.empiece - $scope.limite;
+			console.log($scope.empiece, $scope.limite)
+			APIClient.getProyectos($scope.empiece, $scope.limite).then(
+				//primero siempre el succes
+				function(data){
+					if(!data.result){
+	                    alert(data.err);
+	                }else{
+	                    $scope.model = data.rows;
+
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+	                }	
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
+		};
 
 		// Controller start
 		APIClient.getProyectos().then(
 			//primero siempre el succes
 			function(data){
-
-
 				if(!data.result){
                     alert(data.err);
                 }else{
@@ -39204,7 +39324,6 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 						$scope.uiState = "ideal";
 					}
                 }	
-				
 			},
 
 			//segundo si ha habido error
@@ -39225,11 +39344,69 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 		$scope.uiState = "loading";
 		$scope.model = [];
 		$scope.usuario = autentication.getLoginLocal()[1];
+		//globales que mantengo actualizadas para el tema de paginacion
+		$scope.empiece = 0;
+		$scope.limite = 4;
 
 		// Scope métodos
 		$scope.getMovieDetailURL = function(proyecto){
             return URL.resolve(paths.detalleProyecto, {id: proyecto._id});
         };
+
+        $scope.nextPaginacion = function(){
+
+			$scope.empiece = $scope.empiece + $scope.limite;
+			APIClient.getProyectos($scope.empiece, $scope.limite).then(
+				//primero siempre el succes
+				function(data){
+					if(!data.result){
+	                    alert(data.err);
+	                }else{
+	                    $scope.model = data.rows;
+
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+	                }	
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
+		};
+
+		$scope.previusPaginacion = function(){
+
+			$scope.empiece = $scope.empiece - $scope.limite;
+			console.log($scope.empiece, $scope.limite)
+			APIClient.getProyectos($scope.empiece, $scope.limite).then(
+				//primero siempre el succes
+				function(data){
+					if(!data.result){
+	                    alert(data.err);
+	                }else{
+	                    $scope.model = data.rows;
+
+						if($scope.model.length == 0){
+							$scope.uiState = "blank";
+						}else{
+							$scope.uiState = "ideal";
+						}
+	                }	
+				},
+
+				//segundo si ha habido error
+				function(data){
+					$log.error("Error", data);
+					$scope.uiState = "error";
+				}
+			);
+		};
 
 		
 		// Controller start
@@ -39438,14 +39615,27 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
     }]
 );
 ;angular.module("toDoBabel").service("APIClient", 
-    ["$http", "$q", "api_paths", "URL","$log", function($http, $q, api_paths, URL, $log){
+    ["$http", "$q", "api_paths", "URL","$log","URL_paginacion", function($http, $q, api_paths, URL, $log, URL_paginacion){
 
+        //variable global por defecto en mi aplicación pido un limite de 4 items al servidor
+        //para el tema de la paginación.
+        var limiteGlobal = 4;
+        var limiteGlobalGente = 6;
         
-        this.getProyectos = function(){
+        this.getProyectos = function(start, limite){
+            var url = api_paths.proyectos;
+            var start = start;
+            var limite = limite;
+            if(start == undefined && limite == undefined){
+                start = 0;
+                limite = limiteGlobal;
+                
+            }
+            url = URL_paginacion.resolve(api_paths.proyectos, start, limite); 
             //Crear el objeto diferido
             var deferred = $q.defer();
             //Hacer trabajo asíncrono
-            $http.get(api_paths.proyectos).then(
+            $http.get(url).then(
                 function(response){
                         //resolver la promesa
                         deferred.resolve(response.data);
@@ -39459,12 +39649,21 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
             return deferred.promise; 
         };
         
-        this.getProyectosUsuario = function(id){
+        this.getProyectosUsuario = function(id, start, limite){
+            var url = URL.resolve(api_paths.proyectosUsuario, {id: id});
+            var start = start;
+            var limite = limite;
+            if(start == undefined && limite == undefined){
+                start = 0;
+                limite = limiteGlobal;
+                
+            }
+            url = URL_paginacion.resolve(url, start, limite); 
+
             //Crear el objeto diferido
             var deferred = $q.defer();
-            //Hacer trabajo asíncrono
-            var urlBien  = URL.resolve(api_paths.proyectosUsuario, {id: id});
-            $http.get(urlBien).then(
+            
+            $http.get(url).then(
                 function(response){
                         //resolver la promesa
                         deferred.resolve(response.data);
@@ -39573,11 +39772,20 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
             return deferred.promise; 
         };
 
-        this.getGente = function(){
+        this.getGente = function(start, limite){
+            var url = api_paths.gente
+            var start = start;
+            var limite = limite;
+            if(start == undefined && limite == undefined){
+                start = 0;
+                limite = limiteGlobalGente;
+                
+            }
+            url = URL_paginacion.resolve(url, start, limite); 
             //Crear el objeto diferido
             var deferred = $q.defer();
             //Hacer trabajo asíncrono
-            $http.get(api_paths.gente).then(
+            $http.get(url).then(
                 function(response){
                         //resolver la promesa
                         deferred.resolve(response.data);
@@ -39692,6 +39900,17 @@ angular.module("toDoBabel",['ngRoute',  "ngSanitize"]).config(
 			}
 		}
 		return finalURL.join("/");
+	};
+}])
+;angular.module("toDoBabel").service("URL_paginacion", ["$log",function($log){
+	this.resolve = function(url,start,limite){
+
+		var startContruido = "?start=" + start;
+		var limiteConstruido = "&limit=" + limite;
+
+		var urlCompleta = url + startContruido + limiteConstruido;
+
+		return urlCompleta;
 	};
 }])
 ;angular.module("toDoBabel").service("autentication", ["$http", "$log", "api_paths", "$q", function($http, $log, api_paths, $q){
