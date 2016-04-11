@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose'); 
 var Proyecto = mongoose.model("Proyecto");
+var sha256 = require("sha256");
 
 
 /*Funcion que comprueba si el nombre ya está guardado en la base de datos*/
@@ -29,6 +30,7 @@ function nombreUnico (nombre, callback){
 
 //Método get que devuelve una lista con todos los proyectos de la empresa, por si fuera necesario.
 router.get('/', function(req, res, next) {
+
     var init = 0;
     if (req.query.start){
         init = parseInt(req.query.start);
@@ -100,9 +102,9 @@ router.get('/usuario/:nombre', function(req, res, next) {
 
 
         
-        console.log(arrayPaginacion);
+        //console.log(arrayPaginacion);
 
-        res.json({result: true, rows: arrayProyectosSelecc});
+        res.json({result: true, rows: arrayPaginacion});
         return;
     });
 

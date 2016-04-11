@@ -1,76 +1,77 @@
 {
 	"usuarios": [
 		{
-			"nombre": "kevin",
+			"nombre": "Kevin",
 			"email": "kivenoliva@gmail.com",
 			"url_imagen":"http://babel.es/sites/default/files/styles/large_foto_empleado/public/1455641756_0?itok=ov64WAN3",
-			"clave": "85f5e10431f69bc2a14046a13aabaefc660103b6de7a84f75c4b96181d03f0b5"
-		},
-		{
-			"nombre": "araujo",
-			"email": "araujo@gmail.com",
-			"url_imagen":"https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/1/005/00e/133/364dbbe.jpg",
-			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
-		},
-		{
-			"nombre": "Guillermo",
-			"email": "Guillermo@gmail.com",
-			"url_imagen":"https://pbs.twimg.com/profile_images/378800000263268308/13c63c843ea8413b6282b322302a912a_400x400.jpeg",
-			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+			"clave": "0e4dd66217fc8d2e298b78c8cd9392870dcd065d0ff675d0edff5bcd227837e9"
 		},
 		{
 			"nombre": "Jesús",
-			"email": "Jesus@gmail.com",
-			"url_imagen":"https://crm.apd.es/apdlibrary/Portal/69617530-98DB-4272-A77C-4209CE37123C.jpg",
-			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+			"email": "jesus@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/jesus.velasco",
+			"clave": "df169f60a66f5556d70d5600ec6f6737225914f826ea95161dee6c273565213d"
 		},
 		{
-			"nombre": "kevin",
-			"email": "kivenoliva@gmail.com",
-			"url_imagen":"http://babel.es/sites/default/files/styles/large_foto_empleado/public/1455641756_0?itok=ov64WAN3",
-			"clave": "85f5e10431f69bc2a14046a13aabaefc660103b6de7a84f75c4b96181d03f0b5"
+			"nombre": "Héctor",
+			"email": "hector@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/hector.moreno",
+			"clave": "269933d3b8ce8a9987ec85433ff438b6076bb848c50b9a33a6afeb829a34630b"
 		},
 		{
-			"nombre": "araujo",
-			"email": "araujo@gmail.com",
-			"url_imagen":"https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/1/005/00e/133/364dbbe.jpg",
-			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+			"nombre": "Marcos",
+			"email": "marcos@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/marcos.gil",
+			"clave": "d93bf87c8557acd7c10970651c5f9a9c612265e89a66bc0eb098ea48003e895f"
+		},
+		{
+			"nombre": "Miriam",
+			"email": "miriam@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/miriam.merchante",
+			"clave": "ddef973ee0e6b6f81bb67ed8b4fd266cfd57ef920299ccaf815e892c7dc70b00"
+		},
+		{
+			"nombre": "Iván",
+			"email": "ivan@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/ivan.manso",
+			"clave": "f21651bfa2b03298b9eac5580b138b0a6494ea040e7352353594210808fe271a"
+		},
+		{
+			"nombre": "Rocio",
+			"email": "rocio@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/rocio.romero",
+			"clave": "76404165af42aad4c725c3a5de107e4cd120a3778a9a0f90d47c86cf99fcdc05"
+		},
+		{
+			"nombre": "JorgeG",
+			"email": "jorgeG@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/jorge.gonzalez",
+			"clave": "6ec813ab4043270d9cea71768a8afc1db1ae13b9fc5e8a5a7e3bc187b501b636"
 		},
 		{
 			"nombre": "Guillermo",
-			"email": "Guillermo@gmail.com",
-			"url_imagen":"https://pbs.twimg.com/profile_images/378800000263268308/13c63c843ea8413b6282b322302a912a_400x400.jpeg",
-			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+			"email": "guillermo@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/guillermo.araujo",
+			"clave": "418e0211da76c3e1c2c10a01a39786cd56641a009129d76f9bb76aadbe1e6c43"
 		},
 		{
-			"nombre": "Jesús",
-			"email": "Jesus@gmail.com",
-			"url_imagen":"https://crm.apd.es/apdlibrary/Portal/69617530-98DB-4272-A77C-4209CE37123C.jpg",
-			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+			"nombre": "Lautaro",
+			"email": "lautaro@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/lautaro.zuniga",
+			"clave": "45112a7a0ce30e7ae731f8e8330bb3e4bd98733c5b77a920d36b6b5302b796c7"
 		},
 		{
-			"nombre": "kevin",
-			"email": "kivenoliva@gmail.com",
-			"url_imagen":"http://babel.es/sites/default/files/styles/large_foto_empleado/public/1455641756_0?itok=ov64WAN3",
-			"clave": "85f5e10431f69bc2a14046a13aabaefc660103b6de7a84f75c4b96181d03f0b5"
+			"nombre": "Jose",
+			"email": "jose@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/joseluis.romero",
+			"clave": "ae978aa10c628b27427ff2615ad925abdf4171fc7b4d1f7067bd35b23960d371"
 		},
 		{
-			"nombre": "araujo",
-			"email": "araujo@gmail.com",
-			"url_imagen":"https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/1/005/00e/133/364dbbe.jpg",
-			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
-		},
-		{
-			"nombre": "Guillermo",
-			"email": "Guillermo@gmail.com",
-			"url_imagen":"https://pbs.twimg.com/profile_images/378800000263268308/13c63c843ea8413b6282b322302a912a_400x400.jpeg",
-			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
-		},
-		{
-			"nombre": "Jesús",
-			"email": "Jesus@gmail.com",
-			"url_imagen":"https://crm.apd.es/apdlibrary/Portal/69617530-98DB-4272-A77C-4209CE37123C.jpg",
-			"clave": "c51fb26b53f17d8ef2c5c86219a4335835f066fb0fcc25fcca21217e3711b44f"
+			"nombre": "JorgeN",
+			"email": "jorgeN@gmail.com",
+			"url_imagen":"https://lacomunidad.babel.es/avatar/view/jorge.nieto",
+			"clave": "b210d51913dd3eb58a9d2924ea5c06524adaf0f3174f4d832544a145e097c30f"
 		}
+		
 	]
 }

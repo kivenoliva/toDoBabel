@@ -2,8 +2,8 @@
 	"proyectos": [
 		{
 			"nombre": "Proyecto de wallapop",
-			"miembros": ["kevin", "Guillermo", "Jesús","kevin", "kevin", "kevin", "Guillermo"],
-			"fecha": "Tue Apr 12 2016",
+			"miembros": ["Kevin", "Guillermo", "JorgeG", "Iván"],
+			"fecha": "Tue Apr 30 2016",
 			"tareas":[{
 					"tarea": "Empezar maquetado",
 					"estado": "Empezada",
@@ -19,115 +19,115 @@
 				{
 					"tarea": "Terminar el login",
 					"estado": "Empezada",
-					"propietario": "kevin",
+					"propietario": "Kevin",
 					"proyecto" : "Proyecto de wallapop"
 				},
 				{
 					"tarea": "Terminar el listado",
 					"estado": "Finalizada",
-					"propietario": "kevin",
+					"propietario": "JorgeG",
 					"proyecto" : "Proyecto de wallapop"
 				}]
 		},
 		{
-			"nombre": "Proyecto de wallapop2",
-			"miembros": ["kevin", "Guillermo", "Jesús"],
-			"fecha": "Tue Apr 12 2016",
+			"nombre": "Actualizar el Front de la Comunidad",
+			"miembros": ["Rocio", "Miriam", "Jesús"],
+			"fecha": "Tue Apr 24 2016",
 			"tareas":[{
 					"tarea": "Empezar maquetado",
 					"estado": "Empezada",
-					"propietario": "Guillermo",
-					"proyecto" : "Proyecto de wallapop"
+					"propietario": "Rocio",
+					"proyecto" : "Actualizar el Front de la Comunidad"
+				},
+				{
+					"tarea": "Esquematizar en papel el maquetado",
+					"estado": "NoAsignada",
+					"propietario": "",
+					"proyecto" : "Actualizar el Front de la Comunidad"
+				},
+				{
+					"tarea": "Terminar el logout",
+					"estado": "Empezada",
+					"propietario": "Miriam",
+					"proyecto" : "Actualizar el Front de la Comunidad"
+				},
+				{
+					"tarea": "Terminar el listado",
+					"estado": "Finalizada",
+					"propietario": "Jesús",
+					"proyecto" : "Actualizar el Front de la Comunidad"
+				}]
+		},
+		{
+			"nombre": "Video Club Social",
+			"miembros": ["Kevin", "JorgeN", "Héctor", "Lautaro"],
+			"fecha": "Tue Apr 12 2016",
+			"tareas":[{
+					"tarea": "Implementar el login",
+					"estado": "Empezada",
+					"propietario": "Kevin",
+					"proyecto" : "Video Club Social"
 				},
 				{
 					"tarea": "Estructurar el back",
 					"estado": "NoAsignada",
 					"propietario": "",
-					"proyecto" : "Proyecto de wallapop"
+					"proyecto" : "Video Club Social"
 				},
 				{
-					"tarea": "Terminar el login",
+					"tarea": "Pasar los tests",
 					"estado": "Empezada",
-					"propietario": "kevin",
-					"proyecto" : "Proyecto de wallapop"
+					"propietario": "Héctor",
+					"proyecto" : "Video Club Social"
 				},
 				{
 					"tarea": "Terminar el listado",
 					"estado": "Finalizada",
-					"propietario": "kevin",
-					"proyecto" : "Proyecto de wallapop"
+					"propietario": "Lautaro",
+					"proyecto" : "Video Club Social"
 				}]
 		},
 		{
-			"nombre": "Proyecto de wallapop3",
-			"miembros": ["kevin", "Guillermo", "Jesús"],
-			"fecha": "Tue Apr 12 2016",
+			"nombre": "Web para le tienda de ropa",
+			"miembros": ["Jose", "Guillermo", "Kevin"],
+			"fecha": "Tue Apr 16 2016",
 			"tareas":[{
-					"tarea": "Empezar maquetado",
+					"tarea": "Implementar el pago con tarjeta de crédito",
 					"estado": "Empezada",
 					"propietario": "Guillermo",
-					"proyecto" : "Proyecto de wallapop"
+					"proyecto" : "Web para le tienda de ropa"
 				},
 				{
 					"tarea": "Estructurar el back",
 					"estado": "NoAsignada",
 					"propietario": "",
-					"proyecto" : "Proyecto de wallapop"
+					"proyecto" : "Web para le tienda de ropa"
 				},
 				{
-					"tarea": "Terminar el login",
+					"tarea": "Implementar la sección de primavera",
 					"estado": "Empezada",
-					"propietario": "kevin",
-					"proyecto" : "Proyecto de wallapop"
+					"propietario": "Kevin",
+					"proyecto" : "Web para le tienda de ropa"
 				},
 				{
-					"tarea": "Terminar el listado",
+					"tarea": "Terminar el listado de bolsos",
 					"estado": "Finalizada",
-					"propietario": "kevin",
-					"proyecto" : "Proyecto de wallapop"
+					"propietario": "Jose",
+					"proyecto" : "Web para le tienda de ropa"
 				}]
 		},
 		{
-			"nombre": "Proyecto de wallapop4",
-			"miembros": ["kevin", "Guillermo", "Jesús"],
+			"nombre": "Web para ver películas online",
+			"miembros": [ "Iván", "Jesús", "Rocio", "Miriam"],
 			"fecha": "Tue Apr 12 2016",
 			"tareas":[{
-					"tarea": "Empezar maquetado",
-					"estado": "Empezada",
-					"propietario": "Guillermo",
-					"proyecto" : "Proyecto de wallapop"
-				},
-				{
-					"tarea": "Estructurar el back",
-					"estado": "NoAsignada",
-					"propietario": "",
-					"proyecto" : "Proyecto de wallapop"
-				},
-				{
-					"tarea": "Terminar el login",
-					"estado": "Empezada",
-					"propietario": "kevin",
-					"proyecto" : "Proyecto de wallapop"
-				},
-				{
-					"tarea": "Terminar el listado",
-					"estado": "Finalizada",
-					"propietario": "kevin",
-					"proyecto" : "Proyecto de wallapop"
-				}]
-		},
-		{
-			"nombre": "Proyecto de la comunidad",
-			"miembros": [ "Guillermo", "Jesús"],
-			"fecha": "Tue Apr 12 2016",
-			"tareas":[{
-					"tarea": "Empezar maquetado",
+					"tarea": "Revisar fallo al lanzar el vídeo",
 					"estado": "NoAsignada",
 					"propietario": "",
 					"proyecto" : "Proyecto de la comunidad"
 				},
 				{	
-					"tarea": "Estructurar el back",
+					"tarea": "Implementar listado de todas las pelis",
 					"estado": "Finalizada",
 					"propietario": "Jesús",
 					"proyecto" : "Proyecto de la comunidad"
