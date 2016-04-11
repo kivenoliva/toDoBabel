@@ -124,13 +124,13 @@
 					"tarea": "Revisar fallo al lanzar el vídeo",
 					"estado": "NoAsignada",
 					"propietario": "",
-					"proyecto" : "Proyecto de la comunidad"
+					"proyecto" : "Web para ver películas online"
 				},
 				{	
 					"tarea": "Implementar listado de todas las pelis",
 					"estado": "Finalizada",
 					"propietario": "Jesús",
-					"proyecto" : "Proyecto de la comunidad"
+					"proyecto" : "Web para ver películas online"
 				}]
 		}
 	]
