@@ -27,6 +27,16 @@ Antes de utilizar tu servidor, lanza un script que reinicia la base de datos y p
 $ npm run installDB
 ```
 
+Lanza grunt para que tu código se concatene correctamente, para ello instala grunt y less:
+
+
+```
+$ sudo npm install -g grunt-cli less
+```
+
+Y después lanza grunt en tu terminal utilizando "grunt".
+
+
 Ahora puedes empezar a utilizar tu servidor lanzando:
 ```
 $ nodemon
